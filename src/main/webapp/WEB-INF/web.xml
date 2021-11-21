@@ -22,7 +22,7 @@
 
   <servlet-mapping>
     <servlet-name>listerUtilisateurController</servlet-name>
-    <url-pattern>/utilisateur/lister</url-pattern>
+    <url-pattern>/utilisateurs</url-pattern>
   </servlet-mapping>
 
 

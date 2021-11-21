@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Créer un nouveau compte</h1>
-<form method="post" action="Utilisateur/Ajouter">
+<form method="post" action="utilisateur/ajouter">
     <div>
         <label for="prenom">Nom : </label>
         <input type="text" name="prenom" id="prenom" /> <br>

@@ -20,13 +20,14 @@ public class ConnexionBDD {
                 statement = connexion.createStatement();
 
                 // Exécution de la requête
-                resultat = statement.executeQuery("SELECT username,password,score FROM utilisateur;");
+                resultat = statement.executeQuery("SELECT username,password,score FROM utilisateur ORDER BY score DESC LIMIT 10;");
 
                 // Récupération des données
                 while (resultat.next()) {
                     String username = resultat.getString("username");
                     String password = resultat.getString("password");
                     int score = resultat.getInt("score");
+                    System.out.println(username);
 
                     Utilisateur utilisateur = new Utilisateur();
                     utilisateur.setUsername(username);
@@ -34,6 +35,7 @@ public class ConnexionBDD {
                     utilisateur.setScore(score);
 
                     utilisateurs.add(utilisateur);
+                    System.out.println("LISTE "+utilisateurs.get(0).getUsername());
                 }
             } catch (SQLException ignored) {
 
@@ -53,12 +55,13 @@ public class ConnexionBDD {
         private void loadDatabase() {
             // Chargement du driver
             try {
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.cj.jdbc.Driver");
             } catch (ClassNotFoundException ignored) {
             }
 
             try {
                 connexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee", "root", "root");
+
 
             } catch (SQLException e) {
                 e.printStackTrace();
