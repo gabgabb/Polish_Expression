@@ -8,14 +8,6 @@ public class Utilisateur {
         private String password;
         private int score;
 
-    public Utilisateur(String prenom, String nom, String username, String password, int score) {
-        this.prenom = prenom;
-        this.nom = nom;
-        this.username = username;
-        this.password = password;
-        this.score = score;
-    }
-
     public String getPrenom() {return prenom;}
 
     public void setPrenom(String prenom) {this.prenom = prenom;}

@@ -1,5 +1,5 @@
 <%@ page pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,8 @@
     <title>Test</title>
 </head>
 <body>
-<form method="post" action="utilisateur/ajouter">
+<h1>Créer un nouveau compte</h1>
+<form method="post" action="Utilisateur/Ajouter">
     <div>
         <label for="prenom">Nom : </label>
         <input type="text" name="prenom" id="prenom" /> <br>

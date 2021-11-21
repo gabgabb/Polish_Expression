@@ -1,6 +1,4 @@
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="plep.entite.Utilisateur" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,7 +9,7 @@
 <body>
 <h1>Les meilleurs scores</h1>
 <ul>
-        <c:forEach var="utilisateur" items="${ utilisateurs }">
+        <c:forEach var="utilisateur" items="${utilisateurs}">
             <li><c:out value="${ utilisateur.prenom }" /> <c:out value="${ utilisateur.nom }" /></li>
         </c:forEach>
 </ul>
