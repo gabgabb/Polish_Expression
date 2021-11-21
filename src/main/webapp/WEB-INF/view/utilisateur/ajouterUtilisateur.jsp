@@ -7,23 +7,24 @@
     <title>Test</title>
 </head>
 <body>
-<form method="post" action="bonjour">
-    <p>
-        <label for="nom">Nom : </label>
-        <input type="text" name="nom" id="nom" />
-    </p>
-    <p>
-        <label for="prenom">Prénom : </label>
-        <input type="text" name="prenom" id="prenom" />
-    </p>
+<form method="post" action="utilisateur/ajouter">
+    <div>
+        <label for="prenom">Nom : </label>
+        <input type="text" name="prenom" id="prenom" /> <br>
 
-    <input type="submit" />
+        <label for="nom">Prénom : </label>
+        <input type="text" name="nom" id="nom" /> <br>
+
+        <label for="username">Date de naissance : </label>
+        <input type="text" name="username" id="username" /> <br>
+
+        <label for="password">Adresse : </label>
+        <input type="text" name="password" id="password" /> <br>
+
+        <input type="submit" name="Créer" id="Créer"/>
+    </div>
+
 </form>
 
-<ul>
-    <c:forEach var="utilisateur" items="${ utilisateurs }">
-        <li><c:out value="${ utilisateur.prenom }" /> <c:out value="${ utilisateur.nom }" /></li>
-    </c:forEach>
-</ul>
 </body>
 </html>

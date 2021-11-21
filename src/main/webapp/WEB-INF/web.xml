@@ -4,4 +4,26 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>ajouterUtilisateurController</servlet-name>
+    <servlet-class>plep.web.ajouterUtilisateurController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ajouterUtilisateurController</servlet-name>
+    <url-pattern>/utilisateur/ajouter</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>listerUtilisateurController</servlet-name>
+    <servlet-class>plep.web.listerUtilisateurController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>listerUtilisateurController</servlet-name>
+    <url-pattern>/utilisateur/lister</url-pattern>
+  </servlet-mapping>
+
+
 </web-app>

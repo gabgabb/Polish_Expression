@@ -11,13 +11,9 @@
 <body>
 <h1>Les meilleurs scores</h1>
 <ul>
-    <%
-        ArrayList<Utilisateur> listeCollabos = (ArrayList<Utilisateur>) request.getAttribute("listeCollabos");
-        for (Utilisateur c : listeCollabos) {
-    %>
-    <li><%= c.getNom() %></li>
-    <%
-        } %>
+        <c:forEach var="utilisateur" items="${ utilisateurs }">
+            <li><c:out value="${ utilisateur.prenom }" /> <c:out value="${ utilisateur.nom }" /></li>
+        </c:forEach>
 </ul>
 </body>
 </html>
