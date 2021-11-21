@@ -8,7 +8,7 @@
     <title>Calcul mental - Home page</title>
 </head>
 <body>
-<h1>Les meilleurs scores</h1>
+<h1>Les 10 meilleurs scores</h1>
 <table>
         <jsp:useBean id="utilisateurs" scope="request" type="java.util.List"/>
         <c:forEach items="${utilisateurs}" var="utilisateur" >
@@ -17,8 +17,8 @@
                 <td><c:out value="${utilisateur.score}"/></td>
             </tr>
         </c:forEach>
-
-
+        <br>
+        <a href="jeu.jsp"> Jouer !</a>
 </table>
 </body>
 </html>

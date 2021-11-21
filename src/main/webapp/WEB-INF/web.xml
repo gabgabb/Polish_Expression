@@ -5,6 +5,10 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
+  <welcome-file-list>
+    <welcome-file>meilleur_score</welcome-file>
+  </welcome-file-list>
+
   <servlet>
     <servlet-name>ajouterUtilisateurController</servlet-name>
     <servlet-class>plep.web.ajouterUtilisateurController</servlet-class>
@@ -22,7 +26,7 @@
 
   <servlet-mapping>
     <servlet-name>listerUtilisateurController</servlet-name>
-    <url-pattern>/utilisateurs</url-pattern>
+    <url-pattern>/meilleur_score</url-pattern>
   </servlet-mapping>
 
 

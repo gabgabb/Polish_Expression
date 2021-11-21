@@ -8,18 +8,18 @@
 </head>
 <body>
 <h1>Créer un nouveau compte</h1>
-<form method="post" action="utilisateur/ajouter">
+<form method="post" action="ajouter">
     <div>
-        <label for="prenom">Nom : </label>
+        <label for="prenom">Prénom : </label>
         <input type="text" name="prenom" id="prenom" /> <br>
 
-        <label for="nom">Prénom : </label>
+        <label for="nom">Nom : </label>
         <input type="text" name="nom" id="nom" /> <br>
 
-        <label for="username">Date de naissance : </label>
+        <label for="username">Username : </label>
         <input type="text" name="username" id="username" /> <br>
 
-        <label for="password">Adresse : </label>
+        <label for="password">Password : </label>
         <input type="text" name="password" id="password" /> <br>
 
         <input type="submit" name="Créer" id="Créer"/>

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import static plep.utils.Constantes.*;
 
 
-@WebServlet("/utilisateurs")
+@WebServlet("/meilleur_score")
 public class listerUtilisateurController extends HttpServlet {
 
 

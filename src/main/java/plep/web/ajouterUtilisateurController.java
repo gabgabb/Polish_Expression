@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import static plep.utils.Constantes.CONNEXION_BDD;
 
-@WebServlet("/utilisateur/ajouter")
+@WebServlet("/ajouter")
 public class ajouterUtilisateurController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,8 +23,8 @@ public class ajouterUtilisateurController extends HttpServlet {
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setPrenom(request.getParameter("prenom"));
         utilisateur.setNom(request.getParameter("nom"));
-        utilisateur.setUsername("username");
-        utilisateur.setPassword("password");
+        utilisateur.setUsername(request.getParameter("username"));
+        utilisateur.setPassword(request.getParameter("password"));
 
         CONNEXION_BDD.ajouterUtilisateur(utilisateur);
 

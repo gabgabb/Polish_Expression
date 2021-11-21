@@ -10,6 +10,7 @@ public class ConnexionBDD {
         private Connection connexion = null;
 
         public List<Utilisateur> recupUtilisateur() {
+
             List<Utilisateur> utilisateurs = new ArrayList<>();
             Statement statement;
             ResultSet resultat = null;
@@ -35,7 +36,6 @@ public class ConnexionBDD {
                     utilisateur.setScore(score);
 
                     utilisateurs.add(utilisateur);
-                    System.out.println("LISTE "+utilisateurs.get(0).getUsername());
                 }
             } catch (SQLException ignored) {
 
