@@ -28,7 +28,7 @@ public class ajouterUtilisateurController extends HttpServlet {
 
         CONNEXION_BDD.ajouterUtilisateur(utilisateur);
 
-        request.setAttribute("utilisateurs", CONNEXION_BDD.recupUtilisateur());
+        request.setAttribute("utilisateurs", CONNEXION_BDD.recupTopUtilisateur());
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/listerUtilisateur.jsp").forward(request, response);
     }

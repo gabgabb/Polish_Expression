@@ -17,7 +17,7 @@ public class listerUtilisateurController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-            request.setAttribute("utilisateurs", CONNEXION_BDD.recupUtilisateur());
+            request.setAttribute("utilisateurs", CONNEXION_BDD.recupTopUtilisateur());
             request.getRequestDispatcher("/WEB-INF/view/utilisateur/listerUtilisateur.jsp").forward(request, response);
         }
 }

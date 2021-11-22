@@ -9,7 +9,7 @@ public class ConnexionBDD {
 
         private Connection connexion = null;
 
-        public List<Utilisateur> recupUtilisateur() {
+        public List<Utilisateur> recupTopUtilisateur() {
 
             List<Utilisateur> utilisateurs = new ArrayList<>();
             Statement statement;
@@ -21,18 +21,15 @@ public class ConnexionBDD {
                 statement = connexion.createStatement();
 
                 // Exécution de la requête
-                resultat = statement.executeQuery("SELECT username,password,score FROM utilisateur ORDER BY score DESC LIMIT 10;");
+                resultat = statement.executeQuery("SELECT username,score FROM utilisateur ORDER BY score DESC LIMIT 10;");
 
                 // Récupération des données
                 while (resultat.next()) {
                     String username = resultat.getString("username");
-                    String password = resultat.getString("password");
                     int score = resultat.getInt("score");
-                    System.out.println(username);
 
                     Utilisateur utilisateur = new Utilisateur();
                     utilisateur.setUsername(username);
-                    utilisateur.setPassword(password);
                     utilisateur.setScore(score);
 
                     utilisateurs.add(utilisateur);
@@ -83,5 +80,45 @@ public class ConnexionBDD {
                 e.printStackTrace();
             }
         }
+
+    public List<Utilisateur> recupAllUtilisateur() {
+
+        List<Utilisateur> utilisateurs = new ArrayList<>();
+        Statement statement;
+        ResultSet resultat = null;
+
+        loadDatabase();
+
+        try {
+            statement = connexion.createStatement();
+
+            // Exécution de la requête
+            resultat = statement.executeQuery("SELECT username,password FROM utilisateur;");
+
+            // Récupération des données
+            while (resultat.next()) {
+                String username = resultat.getString("username");
+                String password = resultat.getString("password");
+
+                Utilisateur utilisateur = new Utilisateur();
+                utilisateur.setUsername(username);
+                utilisateur.setPassword(password);
+
+                utilisateurs.add(utilisateur);
+            }
+        } catch (SQLException ignored) {
+
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (resultat != null)
+                    resultat.close();
+                if (connexion != null)
+                    connexion.close();
+            } catch (SQLException ignore) {
+            }
+        }
+        return utilisateurs;
+    }
     }
 
