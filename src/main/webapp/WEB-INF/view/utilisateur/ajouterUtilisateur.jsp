@@ -9,8 +9,9 @@
 </head>
 <body>
 <h1>Créer un nouveau compte</h1>
-<form method="post" action="ajouter">
-    <div class="form-group">
+<form id="ajoutUtilisateur" method="post" action="ajouter">
+    <div class="form-group ">
+        <div class="col-xs-2">
         <label for="prenom">Prénom : </label>
         <input class="form-control" type="text" name="prenom" id="prenom" /> <br>
 
@@ -19,13 +20,15 @@
 
         <label for="username">Username : </label>
         <input class="form-control" type="text" name="username" id="username" /> <br>
+            <div id="msg"></div>
 
         <label for="password">Password : </label>
         <input class="form-control"type="text" name="password" id="password" /> <br>
 
+            <span style="color: red"></span>
         <input class="btn btn-primary" type="submit" name="Créer" id="Créer"/>
+        </div>
     </div>
-
 </form>
 
 </body>

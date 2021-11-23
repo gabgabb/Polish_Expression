@@ -14,10 +14,9 @@ import static plep.utils.Constantes.*;
 @WebServlet("/meilleur_score")
 public class listerUtilisateurController extends HttpServlet {
 
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-            request.setAttribute("utilisateurs", CONNEXION_BDD.recupTopUtilisateur());
+            request.setAttribute("utilisateurs", CONNEXION_BDD.recupUtilisateur(10));
             request.getRequestDispatcher("/WEB-INF/view/utilisateur/listerUtilisateur.jsp").forward(request, response);
         }
 }
