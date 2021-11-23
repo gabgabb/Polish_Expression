@@ -1,4 +1,4 @@
-package plep.calcul;
+package plep.utils;
 
 public enum TypeOperateur {
 

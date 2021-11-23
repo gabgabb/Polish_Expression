@@ -1,5 +1,7 @@
 package plep.calcul;
 
+import plep.utils.TypeOperateur;
+
 import java.util.Stack;
 
 public class ExpressionImpl implements Expression {

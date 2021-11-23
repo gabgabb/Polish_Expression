@@ -13,5 +13,4 @@ public class Operateur {
         return this.operateur<4;
     }
 
-
 }
