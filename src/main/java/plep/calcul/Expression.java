@@ -3,7 +3,7 @@ import java.util.Stack;
 
 public interface Expression {
 
-    public Stack empile();
+    public Stack empile(int difficulte);
 
     public int depile(Stack pile);
 

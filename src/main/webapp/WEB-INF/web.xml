@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
 
   <welcome-file-list>
-    <welcome-file>meilleur_score</welcome-file>
+    <welcome-file>login</welcome-file>
   </welcome-file-list>
 
   <servlet>
@@ -27,6 +27,16 @@
   <servlet-mapping>
     <servlet-name>listerUtilisateurController</servlet-name>
     <url-pattern>/meilleur_score</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>loginUtilisateurController</servlet-name>
+    <servlet-class>plep.web.loginUtilisateurController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>loginUtilisateurController</servlet-name>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
 
 

@@ -3,14 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <meta charset="utf-8" />
     <title>Test</title>
 </head>
 <body>
 <h1>Créer un nouveau compte</h1>
 <form id="ajoutUtilisateur" method="post" action="ajouter">
-    <div class="form-group ">
+
+    <div class="form-group w-25">
         <div class="col-xs-2">
         <label for="prenom">Prénom : </label>
         <input class="form-control" type="text" name="prenom" id="prenom" /> <br>
@@ -25,8 +26,8 @@
         <label for="password">Password : </label>
         <input class="form-control"type="text" name="password" id="password" /> <br>
 
-            <span style="color: red"></span>
         <input class="btn btn-primary" type="submit" name="Créer" id="Créer"/>
+
         </div>
     </div>
 </form>

@@ -8,7 +8,7 @@ public class main {
 
         ExpressionImpl expression = new ExpressionImpl();
 
-        expression.empile();
+        expression.empile(2);
 
     }
 }

@@ -35,8 +35,7 @@ public class ajouterUtilisateurController extends HttpServlet {
             out.println("<span style='color:green;'>Username available</span>");
             CONNEXION_BDD.ajouterUtilisateur(utilisateur);
 
-            request.setAttribute("utilisateurs", CONNEXION_BDD.recupUtilisateur(10));
-            this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/listerUtilisateur.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/loginUtilisateur.jsp").forward(request, response);
         } else {
             out.print("<span style='color:red;'>Username unavailable</span>");
             this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/ajouterUtilisateur.jsp").forward(request, response);

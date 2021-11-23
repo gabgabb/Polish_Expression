@@ -7,10 +7,10 @@ import java.util.Stack;
 public class ExpressionImpl implements Expression {
 
     @Override
-    public Stack empile() {
+    public Stack empile(int difficulte) {
         Stack pile = new Stack();
-
-        for(int i=0; i<Math.random()*3;i++){
+        // TODO faire l'empilage
+        for(int i=0; i<Math.random()*difficulte;i++){
             int operateur = (int) (Math.random()*5);
             Operateur ope = new Operateur(operateur);
 

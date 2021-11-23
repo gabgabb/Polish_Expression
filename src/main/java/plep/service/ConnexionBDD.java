@@ -115,5 +115,30 @@ public class ConnexionBDD {
 
             return isAvailable;
         }
+
+        public boolean checkLogin(String username, String password) {
+
+            boolean isCorrect = false;
+
+            if (username.length() >= 4 && password.length() >= 4) {
+                loadDatabase();
+                String sql = "SELECT * FROM utilisateur WHERE username = ? and password = ?";
+                try {
+                    PreparedStatement statement = connexion.prepareStatement(sql);
+
+                    statement.setString(1, username);
+                    statement.setString(2, password);
+
+                    ResultSet result = statement.executeQuery();
+
+                    isCorrect = result.next();
+
+                } catch (SQLException exception) {
+                    exception.printStackTrace();
+                }
+            }
+            return isCorrect;
+        }
+
     }
 
