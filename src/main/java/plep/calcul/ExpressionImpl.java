@@ -10,22 +10,42 @@ public class ExpressionImpl implements Expression {
     public Stack empile(int difficulte) {
         Stack pile = new Stack();
         // TODO faire l'empilage
-        for(int i=0; i<Math.random()*difficulte;i++){
-            int operateur = (int) (Math.random()*5);
+        StringBuilder res= new StringBuilder();
+        for(int i=0; i<difficulte;i++) {
+
+            int operateur = (int) (Math.random() * 6);
             Operateur ope = new Operateur(operateur);
-
-            if(ope.isBinaire()) {
-                ajoutPileNombre((int) (Math.random() * 10), pile);
-                ajoutPileNombre((int) (Math.random() * 10), pile);
-            } else {
-                ajoutPileNombre((int) (Math.random() * 10), pile);
-            }
             ajoutPileOperant(ope, pile);
+            res.append(TypeOperateur.values()[ope.operateur]).append(";");
 
-        }
-        System.out.println(pile.toString());
+                if (!(ope.isBinaire())) {
+                    if ((int) (Math.random() * 2) == 1) {
+                        ajoutPileNombre((int) (Math.random() * 10), pile);
+                    } else {
+                        operateur = (int) (Math.random() * 6);
+                        Operateur ope2 = new Operateur(operateur);
+                        ajoutPileOperant(ope2, pile);
+                        res.append(TypeOperateur.values()[ope.operateur]).append(";");
+
+                    }
+                } else {
+                    ajoutPileNombre((int) (Math.random() * 10), pile);
+                }
+
+                if (i + 1 == difficulte) {
+                    if (ope.isBinaire()) {
+                        ajoutPileNombre((int) (Math.random() * 10), pile);
+                    } else {
+                        ajoutPileNombre((int) (Math.random() * 10), pile);
+                    }
+                }
+            }
+
+        System.out.println(res);
+        System.out.println(pile);
         return pile;
     }
+
 
     @Override
     public int depile(Stack pileCalcul) {
@@ -53,6 +73,7 @@ public class ExpressionImpl implements Expression {
                 pileResultat.push(pileCalcul.pop());
             }
     }
+        System.out.println(pileResultat.peek());
         return (int) pileResultat.peek();
     }
 
