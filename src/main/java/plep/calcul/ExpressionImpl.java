@@ -16,7 +16,7 @@ public class ExpressionImpl implements Expression {
             int operateur = (int) (Math.random() * 6);
             Operateur ope = new Operateur(operateur);
             ajoutPileOperant(ope, pile);
-            res.append(TypeOperateur.values()[ope.operateur]).append(";");
+            res.append(toString(ope));
 
                 if (!(ope.isBinaire())) {
                     if ((int) (Math.random() * 2) == 1) {
@@ -25,7 +25,7 @@ public class ExpressionImpl implements Expression {
                         operateur = (int) (Math.random() * 6);
                         Operateur ope2 = new Operateur(operateur);
                         ajoutPileOperant(ope2, pile);
-                        res.append(TypeOperateur.values()[ope.operateur]).append(";");
+                        res.append(toString(ope2));
 
                     }
                 } else {
@@ -91,12 +91,16 @@ public class ExpressionImpl implements Expression {
 
         switch (TypeOperateur.values()[ope.operateur]){
             case PLUS:
+                ope.res="plus";
                 return c1+c2;
             case MOINS:
+                ope.res="moins";
                 return c1-c2;
             case DIVISE:
+                ope.res="divise";
                 return c1/c2;
             case MULTIPLIE:
+                ope.res="multiplie";
                 return c1*c2;
         }
         return 0;
@@ -110,5 +114,26 @@ public class ExpressionImpl implements Expression {
                 return  (int) Math.pow(c1,-1);
         }
         return 0;
+    }
+
+
+    public String toString(Operateur ope){
+
+        switch (TypeOperateur.values()[ope.operateur]){
+            case PLUS:
+                 return ope.res="plus";
+            case MOINS:
+                return ope.res="moins";
+            case DIVISE:
+                return ope.res="divise";
+            case MULTIPLIE:
+                return ope.res="multiplie";
+            case INVERSE:
+                return ope.res="inverse";
+            case RACINE:
+                return ope.res="racine";
+
+        }
+        return null;
     }
 }
