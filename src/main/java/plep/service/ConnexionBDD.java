@@ -75,10 +75,6 @@ public class ConnexionBDD {
 
             String username = utilisateur.getUsername();
 
-            if (username.length() > 0 && username != null) {
-                String verifSql = "SELECT username FROM utilisateur WHERE username='" + username + "' LIMIT 1";
-
-
                 try {
                     PreparedStatement preparedStatement = connexion.prepareStatement("INSERT INTO utilisateur(prenom, nom, username, password) VALUES(?, ?, ?, SHA1(?));");
                     preparedStatement.setString(1, utilisateur.getPrenom());
@@ -91,7 +87,7 @@ public class ConnexionBDD {
                     e.printStackTrace();
                 }
             }
-        }
+
 
         public boolean usernameAvailable(Utilisateur utilisateur){
             boolean isAvailable = true;
@@ -122,7 +118,7 @@ public class ConnexionBDD {
 
             if (username.length() >= 4 && password.length() >= 4) {
                 loadDatabase();
-                String sql = "SELECT * FROM utilisateur WHERE username = ? and password = ?";
+                String sql = "SELECT * FROM utilisateur WHERE username = ? and password = SHA1(?)";
                 try {
                     PreparedStatement statement = connexion.prepareStatement(sql);
 

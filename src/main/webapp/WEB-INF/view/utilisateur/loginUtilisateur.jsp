@@ -28,7 +28,7 @@
     <br>
     <input class="btn btn-success" type="submit" value="Connexion"><br>
 
-    <a class="btn btn-primary" href="utilisateur/ajouter"> Créer un compte</a>
+    <a class="btn btn-primary" href="ajouter"> Créer un compte</a>
 
 </form>
 
