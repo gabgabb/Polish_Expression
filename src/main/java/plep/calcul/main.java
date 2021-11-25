@@ -9,8 +9,9 @@ public class main {
         ExpressionImpl expression = new ExpressionImpl();
 
         Stack pile= expression.empile(2);
-
+        expression.calculHumain(pile);
         expression.depile(pile);
+
 
 
     }

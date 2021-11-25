@@ -15,4 +15,5 @@ public interface Expression {
 
     public int calcul(int c1, Operateur ope);
 
+    public String calculHumain(Stack pile);
 }

@@ -26,7 +26,7 @@
         <input class="form-control" type="text" name="password"/>
     </div>
     <br>
-    <input class="btn btn-success" type="submit" value="Connexion"><br>
+    <input class="btn btn-success" type="submit" value="Connexion"><br><br>
 
     <a class="btn btn-primary" href="ajouter"> Créer un compte</a>
 
