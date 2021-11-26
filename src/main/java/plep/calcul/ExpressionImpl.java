@@ -1,13 +1,12 @@
 package plep.calcul;
 
 import plep.utils.TypeOperateur;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Stack;
 
 public class ExpressionImpl implements Expression {
 
+    // Génère une pile de calcul selon une difficulté précisé
     @Override
     public Stack empile(int difficulte) {
 
@@ -61,7 +60,7 @@ public class ExpressionImpl implements Expression {
         return pile;
     }
 
-
+    // Dépile pour faire le calcul du résultat
     @Override
     public int depile(Stack pileCalcul) {
         Stack pileResultat = new Stack();
@@ -84,11 +83,12 @@ public class ExpressionImpl implements Expression {
                 pileResultat.push(pileCalcul.pop());
 
             }
-    }
+        }
         System.out.println("Résultat :" + pileResultat.peek());
         return (int) pileResultat.peek();
     }
 
+    // Ajout d'un opérant à la pile
     @Override
     public void ajoutPileOperant(Operateur operande, Stack pile) {
         pile.push(operande);
@@ -129,6 +129,7 @@ public class ExpressionImpl implements Expression {
         }
         return 0;
     }
+
 
     public String calculHumain(Stack pile) {
 

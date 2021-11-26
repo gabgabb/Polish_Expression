@@ -1,16 +1,26 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Gabriel
-  Date: 21/11/2021
-  Time: 23:36
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Polish expression</title>
+    <title>Calcul mental</title>
 </head>
 <body>
 
+    <label for=""></label>
+
+    <form action="calculMental" method="post">
+        <div id="">
+
+        </div>
+        <input type="text" id="reponse" placeholder="Entrez le résultat"/>
+    <input type="submit" value="Valider"/>
+    </form>
+
 </body>
+<script>
+    setInterval(function()
+    {
+        alert("hi");
+    }, 300);
+</script>
 </html>

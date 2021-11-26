@@ -39,5 +39,14 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>calculController</servlet-name>
+    <servlet-class>plep.web.calculController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>calculController</servlet-name>
+    <url-pattern>/calculMental</url-pattern>
+  </servlet-mapping>
 
 </web-app>

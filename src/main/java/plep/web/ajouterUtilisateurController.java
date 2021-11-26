@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 
 import static plep.utils.Constantes.CONNEXION_BDD;
+import static plep.utils.Constantes.UTILISATEUR_BDD;
 
 @WebServlet("/ajouter")
 public class ajouterUtilisateurController extends HttpServlet {
@@ -30,10 +31,10 @@ public class ajouterUtilisateurController extends HttpServlet {
         utilisateur.setUsername(request.getParameter("username"));
         utilisateur.setPassword(request.getParameter("password"));
 
-        if(CONNEXION_BDD.usernameAvailable(utilisateur)) {
+        if(UTILISATEUR_BDD.usernameAvailable(utilisateur)) {
 
             out.println("<span style='color:green;'>Username available</span>");
-            CONNEXION_BDD.ajouterUtilisateur(utilisateur);
+            UTILISATEUR_BDD.ajouterUtilisateur(utilisateur);
 
             this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/loginUtilisateur.jsp").forward(request, response);
         } else {

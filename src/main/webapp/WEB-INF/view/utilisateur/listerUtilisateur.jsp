@@ -34,6 +34,6 @@
 
 </table>
 <br>
-<a class="btn btn-lg btn-primary" href="jeu.jsp"> Jouer !</a>
+<a class="btn btn-lg btn-primary" href="calculMental"> Jouer !</a>
 </body>
 </html>

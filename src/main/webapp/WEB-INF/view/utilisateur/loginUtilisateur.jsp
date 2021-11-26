@@ -19,11 +19,11 @@
 <form action="login" method="post">
 
     <div class="form-group w-25">
-        <label>Username : </label> <br>
-        <input class="form-control" type="text" name="username"/><br>
+        <label for="username">Username : </label> <br>
+        <input class="form-control" type="text" id="username" name="username" required/><br>
 
-        <label>Mot de passe : </label><br>
-        <input class="form-control" type="text" name="password"/>
+        <label for="password">Mot de passe : </label><br>
+        <input class="form-control" type="password" id="password" name="password" minlength="8" required/>
     </div>
     <br>
     <input class="btn btn-success" type="submit" value="Connexion"><br><br>
