@@ -21,22 +21,6 @@ public class calculController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        int score =0;
-        int difficulte =  Integer.parseInt(req.getParameter("difficulte"));
-
-        while(score<=10){
-
-            req.setAttribute("affichage", Constantes.CALCUL.afficherCalcul(difficulte));
-            String reponse = req.getParameter("reponse");
-
-            score++;
-        }
-
-        this.getServletContext().getRequestDispatcher("/WEB-INF/view/calcul/jeu.jsp").forward(req, resp);
     }
 
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
 }
