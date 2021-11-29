@@ -1,15 +1,19 @@
 package plep.calcul;
 
+import plep.service.Calcul;
+
 import java.util.Stack;
 
 public class main {
     public static void main(String[] args) {
 
-        ExpressionImpl expression = new ExpressionImpl();
+       Calcul cal = new Calcul();
+       Stack pile = cal.GenerationPile(3);
+        System.out.println(pile);
+        cal.afficherCalcul(pile);
+        System.out.println(cal.afficherCalcul(pile));
 
-        Stack pile= expression.empile(2);
-        expression.calculHumain(pile);
-        expression.depile(pile);
+        System.out.println("Résultat = " + cal.resultatCalcul(pile));
 
     }
 }

@@ -54,5 +54,6 @@
             $("#errorAlert").hide();
         });
     }, 1000);
+
 </script>
 </html>

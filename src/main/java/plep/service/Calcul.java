@@ -9,15 +9,22 @@ public class Calcul {
         return Constantes.EXPRESSION.empile(difficulte);
     }
 
-    public String afficherCalcul(int difficulte){
+    public String afficherCalcul(Stack pile){
 
-        String affichageCalcul = "";
-        affichageCalcul = Constantes.EXPRESSION.calculHumain(GenerationPile(difficulte));
+        Stack cloneCalcul = (Stack) pile.clone();
+        Stack pileBonOrdre = new Stack<>();
 
-        return affichageCalcul;
+        while(cloneCalcul.size()>0){
+            pileBonOrdre.push(cloneCalcul.pop());
+
+        }
+        System.out.println(pileBonOrdre);
+
+        return Constantes.EXPRESSION.toStringPile(pileBonOrdre);
+
     }
 
-    public int resultatPile(Stack pile){
+    public int resultatCalcul(Stack pile){
         return Constantes.EXPRESSION.depile(pile);
     }
 
@@ -36,9 +43,9 @@ public class Calcul {
         int nbCalcul=0;
         int score =0;
         while(nbCalcul<=9){
-            afficherCalcul(diff);
+            //afficherCalcul(diff);
             Stack calculpile = GenerationPile(diff);
-            int resultat = resultatPile(calculpile);
+            int resultat = resultatCalcul(calculpile);
 
             if(verifReponseCalcul(resultat, reponseUtilisateur)){
                 score++;
