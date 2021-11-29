@@ -49,6 +49,7 @@
 
 <script type="text/javascript">
     window.setTimeout(function() {
+
         $("#errorAlert").fadeTo(500, 0).slideUp(500, function() {
             $("#errorAlert").hide();
         });
