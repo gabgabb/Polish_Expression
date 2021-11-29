@@ -16,8 +16,6 @@ public class ConnexionBDD {
 
         try {
             connexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/javaee", "root", "root");
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -32,8 +30,8 @@ public class ConnexionBDD {
                 resultat.close();
             if (connexion != null)
                 connexion.close();
-        } catch (SQLException ignore) {
-            ignore.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

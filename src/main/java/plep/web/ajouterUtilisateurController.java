@@ -1,7 +1,6 @@
 package plep.web;
 
 import plep.entite.Utilisateur;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.PreparedStatement;
-
-import static plep.utils.Constantes.CONNEXION_BDD;
 import static plep.utils.Constantes.UTILISATEUR_BDD;
 
 @WebServlet("/ajouter")

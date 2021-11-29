@@ -4,9 +4,17 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="2">
+          <list size="10">
             <item index="0" class="java.lang.String" itemvalue="required" />
             <item index="1" class="java.lang.String" itemvalue="minlength" />
+            <item index="2" class="java.lang.String" itemvalue="aria-hidden" />
+            <item index="3" class="java.lang.String" itemvalue="role" />
+            <item index="4" class="java.lang.String" itemvalue="aria-live" />
+            <item index="5" class="java.lang.String" itemvalue="data-dismiss" />
+            <item index="6" class="java.lang.String" itemvalue="aria-label" />
+            <item index="7" class="java.lang.String" itemvalue="aria-atomic" />
+            <item index="8" class="java.lang.String" itemvalue="data-autohide" />
+            <item index="9" class="java.lang.String" itemvalue="autohide" />
           </list>
         </value>
       </option>
@@ -15,7 +23,7 @@
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="7">
+          <list size="9">
             <item index="0" class="java.lang.String" itemvalue="nobr" />
             <item index="1" class="java.lang.String" itemvalue="noembed" />
             <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -23,10 +31,15 @@
             <item index="4" class="java.lang.String" itemvalue="embed" />
             <item index="5" class="java.lang.String" itemvalue="script" />
             <item index="6" class="java.lang.String" itemvalue="a" />
+            <item index="7" class="java.lang.String" itemvalue="svg" />
+            <item index="8" class="java.lang.String" itemvalue="use" />
           </list>
         </value>
       </option>
       <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="RequiredAttributes" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myAdditionalRequiredHtmlAttributes" value="type" />
     </inspection_tool>
   </profile>
 </component>

@@ -40,7 +40,7 @@ public class Calcul {
             Stack calculpile = GenerationPile(diff);
             int resultat = resultatPile(calculpile);
 
-            if(verifReponseCalcul(resultat, reponseUtilisateur){
+            if(verifReponseCalcul(resultat, reponseUtilisateur)){
                 score++;
             }
             nbCalcul++;
