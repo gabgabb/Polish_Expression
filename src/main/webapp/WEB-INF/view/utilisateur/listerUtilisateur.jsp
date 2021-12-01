@@ -36,5 +36,13 @@
 </table>
 <br>
 <a class="btn btn-lg btn-primary" href="calculMental"> Jouer !</a>
+
+<select id="diff" name="diff" class="form-select" data-size="5" aria-label="Default select example" >
+    <option>Selectionner une difficulté</option>
+    <option selected value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+</select>
+
 </body>
 </html>

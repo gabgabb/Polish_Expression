@@ -7,14 +7,8 @@
 </head>
 <body>
 
-        <select id="diff" class="form-select" data-size="5" aria-label="Default select example" >
-            <option selected>Selectionner une difficulté</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>
-
-        <p id="affichageCalcul"> Calcul </p>
+        <c:set var="calcul" value="${calcul}" scope="request"/>
+        <c:out value="${requestScope.calcul}"/>
         <input type="text" id="reponse" placeholder="Entrez le résultat" onclick="refreshCalcul()"/>
         <input type="submit" value="Valider"/>
 
@@ -27,7 +21,7 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: './Calcul'+difficulte,   //Make sure you put the correct endpoint URL here!
+                    url: 'calculMental',   //Make sure you put the correct endpoint URL here!
                     success: function(data) {
                         //DO SOMETHING HERE AFTER YOU GET THE RESPONSE FROM the validate function
                         document.getElementById("affichageCalcul").innerHTML = data;
