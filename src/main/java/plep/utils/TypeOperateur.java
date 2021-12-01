@@ -17,7 +17,7 @@ public enum TypeOperateur {
             case INVERSE:
                 return "inv";
             case RACINE:
-                return "√";
+                return "racine";
             default:
                return "Symbole non connu";
         }

@@ -8,29 +8,36 @@
 <body>
 
         <c:set var="calcul" value="${calcul}" scope="request"/>
+        <p id="calcul">
         <c:out value="${requestScope.calcul}"/>
-        <input type="text" id="reponse" placeholder="Entrez le résultat" onclick="refreshCalcul()"/>
-        <input type="submit" value="Valider"/>
+        </p>
+        <input type="number" id="reponse" name="reponse" placeholder="Entrez le résultat"/>
+        <input id="valider" type="submit" value="Valider" name="valider"/>
+
+        <p id="score"></p>
 
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
 
-    function refreshCalcul() {
-                select = document.getElementById("diff");
-                difficulte = select.selectedIndex;
+    $("#valider").on('click',function() {
+            //reponse = $("#reponse").val();
+            $.ajax({
+                type : "POST",
+                url : "${pageContext.request.contextPath}/calculMental",
+                data : $('#reponse').serialize(),
+                dataType : "text",
+                success : function(resultat, score) {
+                    $("#calcul").text(resultat);
+                    $("#score").text(score);
+                },
+                error: function (errorThrown) {
+                    //your error code
+                    alert("not success : " + errorThrown);
+                }
+            });
+    });
 
-                $.ajax({
-                    type: 'GET',
-                    url: 'calculMental',   //Make sure you put the correct endpoint URL here!
-                    success: function(data) {
-                        //DO SOMETHING HERE AFTER YOU GET THE RESPONSE FROM the validate function
-                        document.getElementById("affichageCalcul").innerHTML = data;
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        //Do something on ERROR here
-                    }
-                });
-    }
 
 </script>
 </html>

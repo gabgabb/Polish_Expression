@@ -131,6 +131,22 @@ public class UtilisateurBDD {
         return null;
     }
 
+    public void enregistrerScore(Utilisateur user, int score) {
+
+        Connection connexion = Constantes.CONNEXION_BDD.loadDatabase();
+        String sql = "UPDATE utilisateur SET score = ? WHERE username = ? ";
+
+        try {
+            PreparedStatement statement = connexion.prepareStatement(sql);
+            statement.setInt(1, score);
+            statement.setString(2, user.getUsername());
+            statement.executeQuery();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     // Conservez les informations de l'utilisateur
     public void setLogUser(HttpSession session, Utilisateur logUtilisateur) {
         session.setAttribute("logUtilisateur", logUtilisateur);

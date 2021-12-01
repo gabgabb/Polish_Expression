@@ -2,6 +2,7 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/java/plep/service/ConnexionBDD.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/plep/service/UtilisateurBDD.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/plep/web/ajouterUtilisateurController.java" dialect="GenericSQL" />
   </component>
 </project>

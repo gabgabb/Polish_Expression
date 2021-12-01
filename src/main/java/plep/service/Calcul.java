@@ -38,20 +38,4 @@ public class Calcul {
         }
         return bonneReponse;
     }
-
-    public int suiteCalcul(int diff, int reponseUtilisateur){
-        int nbCalcul=0;
-        int score =0;
-        while(nbCalcul<=9){
-            //afficherCalcul(diff);
-            Stack calculpile = GenerationPile(diff);
-            int resultat = resultatCalcul(calculpile);
-
-            if(verifReponseCalcul(resultat, reponseUtilisateur)){
-                score++;
-            }
-            nbCalcul++;
-        }
-        return score;
-    }
 }
