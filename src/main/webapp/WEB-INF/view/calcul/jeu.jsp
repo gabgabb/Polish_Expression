@@ -7,11 +7,10 @@
 </head>
 <body>
 
-        <c:set var="calcul" value="${calcul}" scope="request"/>
-        <p id="calcul">
-        <c:out value="${requestScope.calcul}"/>
-        </p>
-        <input type="number" id="reponse" name="reponse" placeholder="Entrez le résultat"/>
+        <c:set var="calcul" value="${StringCalcul}" scope="request"/>
+        <p id="calcul"> <c:out value="${requestScope.StringCalcul}"/> </p>
+
+        <input type="number" id="reponse" name="reponse" placeholder="Entrez le résultat" required/>
         <input id="valider" type="submit" value="Valider" name="valider"/>
 
         <p id="score"></p>
@@ -20,16 +19,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 
+    var nbCalcul = 0;
     $("#valider").on('click',function() {
-            //reponse = $("#reponse").val();
+
+            console.log("calcul : " + nbCalcul);
+            var reponse = $('#reponse').val();
+            console.log("reponse : "+reponse);
             $.ajax({
                 type : "POST",
                 url : "${pageContext.request.contextPath}/calculMental",
-                data : $('#reponse').serialize(),
-                dataType : "text",
-                success : function(resultat, score) {
-                    $("#calcul").text(resultat);
-                    $("#score").text(score);
+                contentType : 'application/json',
+                data : JSON.stringify({ data1 : reponse, data2 : nbCalcul}),
+
+                success : function(resultat) {
+                    //nbCalcul++;
+                    //$("#calcul").text(resultat);
+                    //$('#score').text(score);
+                    //console.log("Calcul numero : " + nbCalcul);
+
                 },
                 error: function (errorThrown) {
                     //your error code

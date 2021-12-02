@@ -21,8 +21,13 @@ public class ExpressionImpl implements Expression {
                 ajoutPileOperant(ope, pile);
 
                 if (ope.isBinaire()) {
-                    ajoutPileNombre((int) (Math.random() * 10), pile);
-                    ajoutPileNombre((int) (Math.random() * 10), pile);
+                    if(ope.operateur==2) {
+                        ajoutPileNombre((int) ((Math.random() * 9)+1), pile);
+                        ajoutPileNombre((int) ((Math.random() * 9)+1), pile);
+                    } else {
+                        ajoutPileNombre((int) (Math.random() * 10), pile);
+                        ajoutPileNombre((int) (Math.random() * 10), pile);
+                    }
                 } else {
                     ajoutPileNombre((int) (Math.random() * 10), pile);
                 }
@@ -43,13 +48,15 @@ public class ExpressionImpl implements Expression {
 
                 if (!(ope.isBinaire())) {
                     if ((int) (Math.random() * 2) == 1) {
-                        ajoutPileNombre((int) (Math.random() * 10), pile);
+                            ajoutPileNombre((int) (Math.random() * 10), pile);
                     } else {
                         operateur = (int) ((Math.random() * 2) + 3);
                         Operateur ope2 = new Operateur(operateur);
                         ajoutPileOperant(ope2, pile);
 
                     }
+                } else if(ope.operateur==2){
+                    ajoutPileNombre((int) ((Math.random() * 9)+1), pile);
                 } else {
                     ajoutPileNombre((int) (Math.random() * 10), pile);
                 }
@@ -137,7 +144,7 @@ public class ExpressionImpl implements Expression {
             Operateur ope = (Operateur) pile.pop();
 
             if(!(ope.isBinaire())){
-                return ( "( " + TypeOperateur.mapping(TypeOperateur.values()[ope.operateur]) + " (  " + toStringPile(pile) + " )");
+                return ( "( " + TypeOperateur.mapping(TypeOperateur.values()[ope.operateur]) + " (  " + toStringPile(pile) + " )" + " )");
 
             } else {
                 String premier = toStringPile(pile);

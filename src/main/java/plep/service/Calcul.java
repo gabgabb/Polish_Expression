@@ -16,7 +16,6 @@ public class Calcul {
 
         while(cloneCalcul.size()>0){
             pileBonOrdre.push(cloneCalcul.pop());
-
         }
         System.out.println(pileBonOrdre);
 
@@ -25,7 +24,8 @@ public class Calcul {
     }
 
     public int resultatCalcul(Stack pile){
-        return Constantes.EXPRESSION.depile(pile);
+        Stack cloneCalcul = (Stack) pile.clone();
+        return Constantes.EXPRESSION.depile(cloneCalcul);
     }
 
     public boolean verifReponseCalcul(int resultatPile,int reponse){
