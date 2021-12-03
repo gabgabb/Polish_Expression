@@ -3,7 +3,7 @@
     padding:0;
 }
 
-#formLogin, #ajoutUtilisateur{
+#formLogin, #ajoutUtilisateur, #calculJeu{
 
     display: flex;
     flex-direction: column;
@@ -30,5 +30,9 @@ h1{
     top: 18%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+}
+
+.p{
 
 }
