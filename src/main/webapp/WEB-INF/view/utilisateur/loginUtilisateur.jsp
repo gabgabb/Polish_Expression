@@ -1,15 +1,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page
         contentType="text/html; charset=windows-1256"
-         pageEncoding="windows-1256"
+        pageEncoding="windows-1256"
 %>
 
 <!DOCTYPE html>
 
 <html>
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/ressources/style.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/ressources/style.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
     <title>Page de connexion</title>
@@ -20,8 +21,10 @@
 
 <c:if test="${not empty requestScope.error}">
     <div id="errorAlert" class="alert alert-danger d-flex align-items-center" role="alert" autohide="true">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"> <use xlink:href="#exclamation-triangle-fill"></use></svg>
-        <div > ${requestScope.error.toString()} </div>
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+            <use xlink:href="#exclamation-triangle-fill"></use>
+        </svg>
+        <div> ${requestScope.error.toString()} </div>
     </div>
 
 
@@ -38,10 +41,10 @@
 
     </div>
     <div class="buttonLogin">
-    <input class="btn btn-success" type="submit" value="Connexion"><br><br>
+        <input class="btn btn-success" type="submit" value="Connexion"><br><br>
     </div>
     <div class="buttonLogin">
-    <a class="btn btn-primary" href="ajouter"> Créer un compte</a>
+        <a class="btn btn-primary" href="ajouter"> Créer un compte</a>
     </div>
 
 </form>

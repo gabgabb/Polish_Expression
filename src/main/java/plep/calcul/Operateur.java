@@ -1,4 +1,5 @@
 package plep.calcul;
+
 import plep.utils.TypeOperateur;
 
 import java.util.Random;
@@ -10,11 +11,11 @@ public class Operateur {
 
     public Operateur(int operateur) {
         this.operateur = operateur;
-        this.res="";
+        this.res = "";
     }
 
     public boolean isBinaire() {
-        return this.operateur<4;
+        return this.operateur < 4;
     }
 
 }

@@ -21,7 +21,7 @@ public class UtilisateurBDD {
 
         try {
             statement = connexion.createStatement();
-            if( limit > 0) {
+            if (limit > 0) {
                 // Exécution de la requête
                 resultat = statement.executeQuery("SELECT username,score FROM utilisateur ORDER BY score DESC LIMIT " + limit + ";");
             } else {
@@ -64,8 +64,7 @@ public class UtilisateurBDD {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             // Fermeture de la connexion
             Constantes.CONNEXION_BDD.fermetureConnexion(connexion);
         }
@@ -102,7 +101,7 @@ public class UtilisateurBDD {
 
         if (username.length() >= 4 && password.length() >= 4) {
             Connection connexion = Constantes.CONNEXION_BDD.loadDatabase();
-            String sql = "SELECT * FROM utilisateur WHERE username = ? and password = SHA1(?)";
+            String sql = "SELECT * FROM utilisateur WHERE username = ? and password = SHA1(?) ;";
             ResultSet resultat = null;
             try {
                 PreparedStatement statement = connexion.prepareStatement(sql);
@@ -113,7 +112,7 @@ public class UtilisateurBDD {
 
                 resultat = statement.executeQuery();
 
-                if(resultat.next()){
+                if (resultat.next()) {
 
                     Utilisateur userLogin = new Utilisateur();
                     userLogin.setUsername(username);
@@ -134,13 +133,13 @@ public class UtilisateurBDD {
     public void enregistrerScore(Utilisateur user, int score) {
 
         Connection connexion = Constantes.CONNEXION_BDD.loadDatabase();
-        String sql = "UPDATE utilisateur SET score = ? WHERE username = ? ";
+        String sql = "UPDATE utilisateur SET score = ? WHERE username = ? ;";
 
         try {
             PreparedStatement statement = connexion.prepareStatement(sql);
             statement.setInt(1, score);
             statement.setString(2, user.getUsername());
-            statement.executeQuery();
+            statement.executeUpdate();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

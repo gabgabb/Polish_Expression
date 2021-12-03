@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import static plep.utils.Constantes.UTILISATEUR_BDD;
 
 @WebServlet("/login")
@@ -25,13 +26,13 @@ public class loginUtilisateurController extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        if(UTILISATEUR_BDD.checkLogin(username,password)!=null){
+        if (UTILISATEUR_BDD.checkLogin(username, password) != null) {
             req.setAttribute("utilisateurs", UTILISATEUR_BDD.recupUtilisateur(10));
-            UTILISATEUR_BDD.setLogUser(req.getSession(), UTILISATEUR_BDD.checkLogin(username,password));
+            UTILISATEUR_BDD.setLogUser(req.getSession(), UTILISATEUR_BDD.checkLogin(username, password));
 
             this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/listerUtilisateur.jsp").forward(req, resp);
         } else {
-            error="Username ou mot de passe incorrect.";
+            error = "Username ou mot de passe incorrect.";
             req.setAttribute("error", error);
             this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/loginUtilisateur.jsp").forward(req, resp);
 

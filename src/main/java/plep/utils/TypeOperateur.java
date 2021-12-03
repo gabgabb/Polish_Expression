@@ -2,9 +2,9 @@ package plep.utils;
 
 public enum TypeOperateur {
 
-    PLUS,MOINS,DIVISE,MULTIPLIE,INVERSE,RACINE;
+    PLUS, MOINS, DIVISE, MULTIPLIE, INVERSE, RACINE;
 
-    public static String mapping(TypeOperateur to){
+    public static String mapping(TypeOperateur to) {
         switch (to) {
             case PLUS:
                 return "+";
@@ -19,7 +19,7 @@ public enum TypeOperateur {
             case RACINE:
                 return "racine";
             default:
-               return "Symbole non connu";
+                return "Symbole non connu";
         }
     }
 }

@@ -1,4 +1,5 @@
 package plep.calcul;
+
 import java.util.Stack;
 
 public interface Expression {
