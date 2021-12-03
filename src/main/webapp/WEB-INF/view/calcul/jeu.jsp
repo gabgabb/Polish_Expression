@@ -8,15 +8,15 @@
     <title>Calcul mental</title>
 </head>
 <body>
+<div id="calculJeu">
+    <c:set var="calcul" value="${StringCalcul}" scope="request"/>
+    <p id="calcul"><c:out value="${requestScope.StringCalcul}"/></p>
 
-<c:set var="calcul" value="${StringCalcul}" scope="request"/>
-<p id="calcul"><c:out value="${requestScope.StringCalcul}"/></p>
+    <input class="form-control" type="number" id="reponse" name="reponse" placeholder="Entrez le résultat"/>
+    <input class="btn btn-success" id="valider" type="submit" value="Valider" name="valider"/>
 
-<input type="number" id="reponse" name="reponse" placeholder="Entrez le résultat" />
-<input id="valider" type="submit" value="Valider" name="valider"/>
-
-<p id="bonneReponse"></p>
-
+    <p id="bonneReponse"></p>
+</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
@@ -39,7 +39,7 @@
 
                 $("#calcul").text(resultatJSON.affichageCalcul);
 
-                if(resultatJSON.bonneReponse===true){
+                if (resultatJSON.bonneReponse === true) {
                     $("#bonneReponse").css("color", "green");
                     $("#bonneReponse").text("Bonne réponse !");
                 } else {
@@ -47,10 +47,20 @@
                     $("#bonneReponse").text("Mauvaise réponse !");
                 }
 
-                if(resultatJSON.nbCalcul===8) {
-                    $("#reponse").prop( "disabled", true);
-                    $("#calcul").text("Score total : " +resultatJSON.score);
-                    $("#valider").attr("value", "Continuer");
+                if (resultatJSON.nbCalcul === 10) {
+                    $("#reponse").val("");
+                    $("#reponse").prop("disabled", true);
+                    $("#valider").prop("disabled", true);
+                    setTimeout(function () {
+                        $("#bonneReponse").hide();
+                        $("#calcul").text("Score total : " + resultatJSON.score + "/10");
+
+                    }, 1500);
+                } else {
+                    $("#reponse").val("");
+                    setTimeout(function () {
+                        $("#bonneReponse").text("");
+                    }, 1500);
                 }
             },
             error: function (errorThrown) {

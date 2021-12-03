@@ -48,17 +48,16 @@ public class calculController extends HttpServlet {
         int nbCalcul = (Integer) req.getSession().getAttribute("nbCalcul");
         int score = (Integer) req.getSession().getAttribute("Score");
 
-        if (nbCalcul < 10) {
+        if (nbCalcul <= 10) {
 
             String data = req.getReader().lines().collect(Collectors.joining());
 
             JSONObject jsondata = new JSONObject(data);
             System.out.println("yakak" + jsondata);
 
-            boolean bonneReponse = false;
+            JSONObject sendToAjax = new JSONObject();
 
-            Stack calc = CALCUL.GenerationPile(1);
-            int reponseCalcul = CALCUL.resultatCalcul(calc);
+            boolean bonneReponse = false;
 
             if (nbCalcul == 0) {
 
@@ -67,44 +66,39 @@ public class calculController extends HttpServlet {
                 if (CALCUL.verifReponseCalcul((Integer) reponsePremierCalcul, Integer.parseInt((String) jsondata.get("reponse")))) {
                     score++;
                     System.out.println("SCORE 1: " + score);
-                    req.getSession().setAttribute("Score", score);
                     bonneReponse = true;
                 }
-            } else {
+                nbCalcul++;
+            } else if (nbCalcul != 10) {
 
                 if (CALCUL.verifReponseCalcul((Integer) req.getSession().getAttribute("ReponsePrecedente"), Integer.parseInt((String) jsondata.get("reponse")))) {
                     score++;
                     req.getSession().setAttribute("Score", score);
-                    System.out.println("SCORE 2: " + score);
-
                     bonneReponse = true;
                 }
+                nbCalcul++;
+                if (nbCalcul == 10) {
+                    System.out.println("SCORE : " + score);
+                    sendToAjax.put("score", score);
+                    Constantes.UTILISATEUR_BDD.enregistrerScore(Constantes.UTILISATEUR_BDD.getLogUser(req.getSession()), score);
+                }
             }
-            req.getSession().setAttribute("ReponsePrecedente", reponseCalcul);
 
-            JSONObject sendToAjax = new JSONObject();
-
-            if(nbCalcul==8){
-                nbCalcul++;
-                req.getSession().setAttribute("nbCalcul", nbCalcul);
-
-                System.out.println("SCORE : " + score);
-                sendToAjax.put("score", score);
-
-                Constantes.UTILISATEUR_BDD.enregistrerScore(Constantes.UTILISATEUR_BDD.getLogUser(req.getSession()), score);
-
-            } else {
-                nbCalcul++;
-                req.getSession().setAttribute("nbCalcul", nbCalcul);
-                sendToAjax.put("nbCalcul", nbCalcul);
-                sendToAjax.put("affichageCalcul", CALCUL.afficherCalcul(calc));
+            if (nbCalcul != 10) {
                 sendToAjax.put("bonneReponse", bonneReponse);
+                Stack calc = CALCUL.GenerationPile(1);
+                int reponseCalcul = CALCUL.resultatCalcul(calc);
+                sendToAjax.put("affichageCalcul", CALCUL.afficherCalcul(calc));
+                req.getSession().setAttribute("ReponsePrecedente", reponseCalcul);
             }
+            req.getSession().setAttribute("nbCalcul", nbCalcul);
+            sendToAjax.put("nbCalcul", nbCalcul);
+
             resp.setContentType("application/json");
             PrintWriter writer = resp.getWriter();
 
             writer.append(sendToAjax.toString());
-        }  else {
+        } else {
             req.getRequestDispatcher("/WEB-INF/view/utilisateur/listerUtilisateur.jsp").forward(req, resp);
         }
     }
