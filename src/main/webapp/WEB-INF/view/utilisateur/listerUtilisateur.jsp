@@ -5,10 +5,7 @@
 
 <html>
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/ressources/style.css"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
+    <jsp:include page="/ressources/header.jsp"/>
     <title>Home page</title>
 </head>
 
@@ -35,15 +32,20 @@
     </tbody>
 
 </table>
-<br>
-<a class="btn btn-lg btn-primary" href="calculMental"> Jouer !</a>
 
-<select id="diff" name="diff" class="form-select" data-size="5" aria-label="Default select example">
-    <option>Selectionner une difficulté</option>
-    <option selected value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-</select>
+
+<form id="formJeuMental" class="formulaire" action="meilleur_score" method="post">
+    <input class="btn btn-lg btn-primary" type="submit" value="Jouer !">
+
+    <p> Difficulté :</p>
+    <select name="diff" class="form-select" data-size="5" aria-label="Default select example">
+        <option selected value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+</form>
 
 </body>
 </html>

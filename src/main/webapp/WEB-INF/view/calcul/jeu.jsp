@@ -2,13 +2,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/ressources/style.css"/>
+    <jsp:include page="/ressources/header.jsp"/>
     <title>Calcul mental</title>
 </head>
 <body>
+
 <div id="calculJeu">
+
+    <div class="d-block w-100">
+        <div class="progress">
+            <div id="progressbarCalcul" class="progress-bar bg-info"
+                 role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" style="width: 0"></div>
+        </div>
+    </div>
+
     <c:set var="calcul" value="${StringCalcul}" scope="request"/>
     <p id="calcul"><c:out value="${requestScope.StringCalcul}"/></p>
 
@@ -18,8 +25,8 @@
     <p id="bonneReponse"></p>
 </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript">
+
+<script>
 
     $("#valider").on('click', function () {
 
@@ -36,7 +43,7 @@
 
             success: function (resultatJSON) {
                 console.log(resultatJSON);
-
+                $("#progressbarCalcul").width(resultatJSON.nbCalcul*10 + '%');
                 $("#calcul").text(resultatJSON.affichageCalcul);
 
                 if (resultatJSON.bonneReponse === true) {

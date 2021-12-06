@@ -13,15 +13,14 @@ import static plep.utils.Constantes.*;
 public class listerUtilisateurController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (UTILISATEUR_BDD.getLogUser(request.getSession()) != null) {
-            request.setAttribute("difficulte", request.getParameter("diff"));
             request.setAttribute("utilisateurs", UTILISATEUR_BDD.recupUtilisateur(10));
             request.getRequestDispatcher("/WEB-INF/view/utilisateur/listerUtilisateur.jsp").forward(request, response);
-        } else {
-            String error = "Veuillez vous connecter ou créer un compte.";
-            request.setAttribute("error", error);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/loginUtilisateur.jsp").forward(request, response);
+    }
 
-        }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            String diff = req.getParameter("diff");
+            req.getSession().setAttribute("difficulte", diff);
+            resp.sendRedirect("calculMental");
     }
 }
