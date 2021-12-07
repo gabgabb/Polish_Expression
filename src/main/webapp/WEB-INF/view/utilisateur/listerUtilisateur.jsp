@@ -12,27 +12,29 @@
 <body>
 <h1>Les 10 meilleurs scores</h1>
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Username</th>
-        <th scope="col">Score</th>
-    </tr>
-    </thead>
-    <tbody>
-    <jsp:useBean id="utilisateurs" scope="request" type="java.util.List"/>
-    <c:forEach items="${utilisateurs}" var="utilisateur" varStatus="loop">
+    <table id="tableauScore" class="table table-bordered">
+        <thead class="table-dark">
         <tr>
-            <th scope="row">${loop.count}</th>
-            <td><c:out value="${utilisateur.username}"/></td>
-            <td><c:out value="${utilisateur.score}"/></td>
+            <th scope="col">Top 10</th>
+            <th scope="col">Username</th>
+            <th scope="col">Date</th>
+            <th scope="col">Score</th>
+            <th scope="col">Nombre de partie</th>
         </tr>
-    </c:forEach>
-    </tbody>
-
-</table>
-
+        </thead>
+        <tbody>
+        <jsp:useBean id="utilisateurs" scope="request" type="java.util.List"/>
+        <c:forEach items="${utilisateurs}" var="utilisateur" varStatus="loop">
+            <tr>
+                <th scope="row">${loop.count}</th>
+                <td><c:out value="${utilisateur.username}"/></td>
+                <td><c:out value="${utilisateur.date}"/></td>
+                <td><c:out value="${utilisateur.score}"/></td>
+                <td><c:out value="${utilisateur.nbPartie}"/></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 
 <form id="formJeuMental" class="formulaire" action="meilleur_score" method="post">
     <input class="btn btn-lg btn-primary" type="submit" value="Jouer !">

@@ -6,7 +6,6 @@ public class Utilisateur {
     private String nom;
     private String username;
     private String password;
-    private int score;
 
     public String getPrenom() {
         return prenom;
@@ -40,11 +39,4 @@ public class Utilisateur {
         this.password = password;
     }
 
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
 }

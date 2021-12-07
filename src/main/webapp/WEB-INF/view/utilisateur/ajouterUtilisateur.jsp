@@ -32,4 +32,13 @@
 
 
 </body>
+<script>
+    $(document).ready(function () {
+        $('#navbarbrand').hide();
+        $('#divDroite').hide();
+        $('#containerDiv').removeClass('container-fluid justify-content-between');
+        $('#containerDiv').addClass('container-fluid justify-content-center');
+
+    });
+</script>
 </html>

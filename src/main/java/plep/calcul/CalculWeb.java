@@ -1,10 +1,10 @@
-package plep.service;
+package plep.calcul;
 
 import plep.utils.Constantes;
 
 import java.util.Stack;
 
-public class Calcul {
+public class CalculWeb {
 
     public Stack GenerationPile(int difficulte) {
         return Constantes.EXPRESSION.empile(difficulte);

@@ -1,5 +1,6 @@
 package plep.service;
 
+import plep.entite.Partie;
 import plep.entite.Utilisateur;
 import plep.utils.Constantes;
 
@@ -11,9 +12,10 @@ import java.util.List;
 public class UtilisateurBDD {
 
     // Récupère la liste des utilisateurs de la BDD
-    public List<Utilisateur> recupUtilisateur(int limit) {
+    public List<Utilisateur> recupUtilisateur() {
 
         List<Utilisateur> utilisateurs = new ArrayList<>();
+
         Statement statement;
         ResultSet resultat = null;
 
@@ -21,25 +23,22 @@ public class UtilisateurBDD {
 
         try {
             statement = connexion.createStatement();
-            if (limit > 0) {
-                // Exécution de la requête
-                resultat = statement.executeQuery("SELECT username,score FROM utilisateur ORDER BY score DESC LIMIT " + limit + ";");
-            } else {
-                resultat = statement.executeQuery("SELECT username,password FROM utilisateur ;");
-            }
+            // Exécution de la requête
+            resultat = statement.executeQuery("SELECT username, score, datePartie, COUNT(idpartie) as nbPartie FROM utilisateur INNER JOIN partie ON utilisateur.username = partie.usernamePartie ORDER BY score DESC LIMIT 10 ;");
+
             // Récupération des données
             while (resultat.next()) {
                 String username = resultat.getString("username");
                 int score = resultat.getInt("score");
 
                 Utilisateur utilisateur = new Utilisateur();
+                Partie partie = new Partie();
                 utilisateur.setUsername(username);
-                utilisateur.setScore(score);
 
                 utilisateurs.add(utilisateur);
             }
-        } catch (SQLException ignored) {
-
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             // Fermeture de la connexion
             Constantes.CONNEXION_BDD.fermetureConnexion(resultat, connexion);
@@ -51,8 +50,6 @@ public class UtilisateurBDD {
     public void ajouterUtilisateur(Utilisateur utilisateur) {
 
         Connection connexion = Constantes.CONNEXION_BDD.loadDatabase();
-
-        String username = utilisateur.getUsername();
 
         try {
             PreparedStatement preparedStatement = connexion.prepareStatement("INSERT INTO utilisateur(prenom, nom, username, password) VALUES(?, ?, ?, SHA1(?));");
@@ -109,7 +106,6 @@ public class UtilisateurBDD {
                 statement.setString(1, username);
                 statement.setString(2, password);
 
-
                 resultat = statement.executeQuery();
 
                 if (resultat.next()) {
@@ -128,22 +124,6 @@ public class UtilisateurBDD {
             }
         }
         return null;
-    }
-
-    public void enregistrerScore(Utilisateur user, int score) {
-
-        Connection connexion = Constantes.CONNEXION_BDD.loadDatabase();
-        String sql = "UPDATE utilisateur SET score = ? WHERE username = ? ;";
-
-        try {
-            PreparedStatement statement = connexion.prepareStatement(sql);
-            statement.setInt(1, score);
-            statement.setString(2, user.getUsername());
-            statement.executeUpdate();
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 
     // Conservez les informations de l'utilisateur
