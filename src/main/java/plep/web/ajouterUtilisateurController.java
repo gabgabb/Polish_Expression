@@ -21,8 +21,6 @@ public class ajouterUtilisateurController extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        PrintWriter out = response.getWriter();
-
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setPrenom(request.getParameter("prenom"));
         utilisateur.setNom(request.getParameter("nom"));
@@ -31,12 +29,10 @@ public class ajouterUtilisateurController extends HttpServlet {
 
         if (UTILISATEUR_BDD.usernameAvailable(utilisateur)) {
 
-            out.println("<span style='color:green;'>Username available</span>");
             UTILISATEUR_BDD.ajouterUtilisateur(utilisateur);
 
             this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/loginUtilisateur.jsp").forward(request, response);
         } else {
-            out.print("<span style='color:red;'>Username unavailable</span>");
             this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/ajouterUtilisateur.jsp").forward(request, response);
         }
 

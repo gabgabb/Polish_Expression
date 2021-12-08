@@ -39,4 +39,6 @@ public class Utilisateur {
         this.password = password;
     }
 
+    public void add(Partie partie) {
+    }
 }

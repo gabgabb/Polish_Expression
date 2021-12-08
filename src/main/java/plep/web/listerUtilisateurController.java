@@ -21,7 +21,7 @@ public class listerUtilisateurController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        req.setAttribute("Partie", PARTIE_BDD.creationPartie(UTILISATEUR_BDD.getLogUser(req.getSession())));
+        //req.setAttribute("Partie", PARTIE_BDD.creationPartie(UTILISATEUR_BDD.getLogUser(req.getSession())));
         String diff = req.getParameter("diff");
         req.getSession().setAttribute("difficulte", diff);
         resp.sendRedirect("calculMental");
