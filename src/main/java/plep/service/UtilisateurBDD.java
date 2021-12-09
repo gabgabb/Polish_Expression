@@ -12,9 +12,9 @@ import java.util.List;
 public class UtilisateurBDD {
 
     // Récupère la liste des utilisateurs de la BDD
-    public List<Object> recupUtilisateur() {
+    public List<Partie> recupUtilisateur() {
 
-        List<Object> utilisateurs = new ArrayList<>();
+        List<Partie> ListPartie = new ArrayList<>();
 
         Statement statement;
         ResultSet resultat = null;
@@ -24,31 +24,34 @@ public class UtilisateurBDD {
         try {
             statement = connexion.createStatement();
             // Exécution de la requête
-            resultat = statement.executeQuery("SELECT username, score, datePartie, COUNT(idpartie) as nbPartie FROM utilisateur INNER JOIN partie ON utilisateur.username = partie.usernamePartie ORDER BY score DESC LIMIT 10 ;");
+            resultat = statement.executeQuery("SELECT username, score, datePartie, COUNT(idpartie) OVER (PARTITION BY username ) as nbPartie FROM utilisateur INNER JOIN partie ON utilisateur.username = partie.usernamePartie ORDER BY score DESC LIMIT 10 ;");
 
             // Récupération des données
             while (resultat.next()) {
-                /*String username = resultat.getString("username");
+                String username = resultat.getString("username");
                 int score = resultat.getInt("score");
                 Date date = resultat.getDate("datePartie");
-                int idPartie = resultat.getInt("nbPartie");
+                int nbPartie = resultat.getInt("nbPartie");
 
                 Utilisateur utilisateur = new Utilisateur();
                 Partie partie = new Partie();
-                partie.setScore(score);
-                partie.setDatePartie(date);
 
                 utilisateur.setUsername(username);
-                utilisateur.add(partie);
-                utilisateurs.add(utilisateur);*/
+                utilisateur.setNbPartie(nbPartie);
+                partie.setScore(score);
+                partie.setDatePartie(date);
+                partie.setUtilisateur(utilisateur);
+
+                ListPartie.add(partie);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             // Fermeture de la connexion
-            //Constantes.CONNEXION_BDD.fermetureConnexion(resultat, connexion);
+            Constantes.CONNEXION_BDD.fermetureConnexion(resultat, connexion);
         }
-        return utilisateurs;
+        return ListPartie;
     }
 
     // Ajoute un utilisateur à la BDD depuis le formulaire

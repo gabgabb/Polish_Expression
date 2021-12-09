@@ -24,20 +24,17 @@ public class loginUtilisateurController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-        resp.setContentType("text/html");
-        PrintWriter out = resp.getWriter();
-
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
         if(UTILISATEUR_BDD.checkLogin(username,password)!=null){
-            req.setAttribute("utilisateurs", UTILISATEUR_BDD.recupUtilisateur());
+            req.setAttribute("parties", UTILISATEUR_BDD.recupUtilisateur());
+            UTILISATEUR_BDD.setLogUser(req.getSession(), UTILISATEUR_BDD.checkLogin(username,password));
             this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/listerUtilisateur.jsp").forward(req, resp);
         } else {
-            out.print("Sorry username or password error");
-
+            String error = "Mot de passe ou username incorrect.";
+            req.getSession().setAttribute("error", error );
+            this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/loginUtilisateur.jsp").forward(req, resp);
         }
-        out.close();
     }
 }

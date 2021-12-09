@@ -23,14 +23,14 @@
         </tr>
         </thead>
         <tbody>
-        <jsp:useBean id="utilisateurs" scope="request" type="java.util.List"/>
-        <c:forEach items="${utilisateurs}" var="utilisateur" varStatus="loop">
+        <jsp:useBean id="parties" scope="request" type="java.util.List"/>
+        <c:forEach items="${parties}" var="partie" varStatus="loop">
             <tr>
                 <th scope="row">${loop.count}</th>
-                <td><c:out value="${utilisateur.username}"/></td>
-                <td><c:out value="${utilisateur.date}"/></td>
-                <td><c:out value="${utilisateur.score}"/></td>
-                <td><c:out value="${utilisateur.nbPartie}"/></td>
+                <td><c:out value="${partie.utilisateur.username}"/></td>
+                <td><c:out value="${partie.date}"/></td>
+                <td><c:out value="${partie.score}"/></td>
+                <td><c:out value="${partie.utilisateur.nbPartie}"/></td>
             </tr>
         </c:forEach>
         </tbody>

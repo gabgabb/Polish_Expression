@@ -4,19 +4,19 @@ import java.util.Date;
 
 public class Partie {
 
-    private String username;
+    private Utilisateur user;
     private Date datePartie;
     private int score;
 
-    public String getUser() {
-        return username;
+    public Utilisateur getUtilisateur() {
+        return user;
     }
 
-    public void setUser(String username) {
-        this.username = username;
+    public void setUtilisateur(Utilisateur user) {
+        this.user = user;
     }
 
-    public Date getDatePartie() {
+    public Date getDate() {
         return datePartie;
     }
 

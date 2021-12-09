@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Stack;
 import java.util.stream.Collectors;
+
 import org.json.JSONObject;
 import plep.utils.Constantes;
 
@@ -18,80 +19,84 @@ public class calculController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-                int diff = Integer.parseInt((String) req.getSession().getAttribute("difficulte"));
-                int nbCalcul = 0;
-                int score = 0;
-                Stack calcul = Constantes.CALCUL_WEB.GenerationPile(diff);
+        int diff = Integer.parseInt((String) req.getSession().getAttribute("difficulte"));
+        System.out.print(diff);
+        int nbCalcul = 0;
+        int score = 0;
+        Stack calcul = Constantes.CALCUL_WEB.GenerationPile(diff);
+        System.out.println(calcul);
+        req.getSession().setAttribute("Score", score);
+        System.out.println("score " +score);
+        req.getSession().setAttribute("nbCalcul", nbCalcul);
+        System.out.println(" nbcalcul " + nbCalcul);
+        req.getSession().setAttribute("ReponseCalcul", Constantes.CALCUL_WEB.resultatCalcul(calcul));
+        System.out.println(" resultat" + Constantes.CALCUL_WEB.resultatCalcul(calcul));
+        req.getSession().setAttribute("StringCalcul", Constantes.CALCUL_WEB.afficherCalcul(calcul));
 
-                req.getSession().setAttribute("Score", score);
-                req.getSession().setAttribute("nbCalcul", nbCalcul);
-                req.getSession().setAttribute("ReponseCalcul", Constantes.CALCUL_WEB.resultatCalcul(calcul));
-                req.setAttribute("StringCalcul", Constantes.CALCUL_WEB.afficherCalcul(calcul));
-
-                this.getServletContext().getRequestDispatcher("/WEB-INF/view/calcul/jeu.jsp").forward(req, resp);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/view/calcul/jeu.jsp").forward(req, resp);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            int nbCalcul = (Integer) req.getSession().getAttribute("nbCalcul");
-            int score = (Integer) req.getSession().getAttribute("Score");
+        int nbCalcul = (Integer) req.getSession().getAttribute("nbCalcul");
+        int score = (Integer) req.getSession().getAttribute("Score");
 
-            if (nbCalcul <= 10) {
+        if (nbCalcul <= 10) {
 
-                String data = req.getReader().lines().collect(Collectors.joining());
+            String data = req.getReader().lines().collect(Collectors.joining());
 
-                JSONObject jsondata = new JSONObject(data);
-                System.out.println("yakak" + jsondata);
+            JSONObject jsondata = new JSONObject(data);
+            System.out.println("yakak" + jsondata);
 
-                JSONObject sendToAjax = new JSONObject();
+            JSONObject sendToAjax = new JSONObject();
 
-                boolean bonneReponse = false;
+            boolean bonneReponse = false;
 
-                if (nbCalcul == 0) {
+            if (nbCalcul == 0) {
 
-                    Object reponsePremierCalcul = req.getSession().getAttribute("ReponseCalcul");
+                Object reponsePremierCalcul = req.getSession().getAttribute("ReponseCalcul");
 
-                    if (Constantes.CALCUL_WEB.verifReponseCalcul((Integer) reponsePremierCalcul, Integer.parseInt((String) jsondata.get("reponse")))) {
-                        score++;
-                        System.out.println("SCORE 1: " + score);
-                        bonneReponse = true;
-                    }
-                    nbCalcul++;
-                } else if (nbCalcul != 10) {
-
-                    if (Constantes.CALCUL_WEB.verifReponseCalcul((Integer) req.getSession().getAttribute("ReponsePrecedente"), Integer.parseInt((String) jsondata.get("reponse")))) {
-                        score++;
-                        req.getSession().setAttribute("Score", score);
-                        bonneReponse = true;
-                    }
-                    nbCalcul++;
-                    if (nbCalcul == 10) {
-                        System.out.println("SCORE : " + score);
-                        sendToAjax.put("score", score);
-                        System.out.print(req.getSession().getAttribute("logUtilisateur"));
-                        Constantes.PARTIE_BDD.enregistrerScore(Constantes.UTILISATEUR_BDD.getLogUser(req.getSession()), score);
-                    }
+                if (Constantes.CALCUL_WEB.verifReponseCalcul((Integer) reponsePremierCalcul, Integer.parseInt((String) jsondata.get("reponse")))) {
+                    score++;
+                    System.out.println("SCORE 1: " + score);
+                    bonneReponse = true;
                 }
+                nbCalcul++;
+            } else if (nbCalcul != 10) {
 
-                if (nbCalcul != 10) {
-                    sendToAjax.put("bonneReponse", bonneReponse);
-                    Stack calc = Constantes.CALCUL_WEB.GenerationPile(Integer.parseInt((String) req.getSession().getAttribute("difficulte")));
-                    int reponseCalcul = Constantes.CALCUL_WEB.resultatCalcul(calc);
-                    sendToAjax.put("affichageCalcul", Constantes.CALCUL_WEB.afficherCalcul(calc));
-                    req.getSession().setAttribute("ReponsePrecedente", reponseCalcul);
+                if (Constantes.CALCUL_WEB.verifReponseCalcul((Integer) req.getSession().getAttribute("ReponsePrecedente"), Integer.parseInt((String) jsondata.get("reponse")))) {
+                    score++;
+                    req.getSession().setAttribute("Score", score);
+                    bonneReponse = true;
                 }
-                req.getSession().setAttribute("nbCalcul", nbCalcul);
-                sendToAjax.put("nbCalcul", nbCalcul);
-
-                resp.setContentType("application/json");
-                PrintWriter writer = resp.getWriter();
-
-                writer.append(sendToAjax.toString());
-            } else {
-                resp.sendRedirect("meilleur_score");
+                nbCalcul++;
+                if (nbCalcul == 10) {
+                    System.out.println("SCORE : " + score);
+                    sendToAjax.put("score", score);
+                    System.out.print(req.getSession().getAttribute("logUtilisateur"));
+                    Constantes.PARTIE_BDD.enregistrerScore(Constantes.UTILISATEUR_BDD.getLogUser(req.getSession()), score);
+                }
             }
+
+            if (nbCalcul != 10) {
+                sendToAjax.put("bonneReponse", bonneReponse);
+                Stack calc = Constantes.CALCUL_WEB.GenerationPile(Integer.parseInt((String) req.getSession().getAttribute("difficulte")));
+                int reponseCalcul = Constantes.CALCUL_WEB.resultatCalcul(calc);
+                sendToAjax.put("affichageCalcul", Constantes.CALCUL_WEB.afficherCalcul(calc));
+                req.getSession().setAttribute("ReponsePrecedente", reponseCalcul);
+            }
+            req.getSession().setAttribute("nbCalcul", nbCalcul);
+            sendToAjax.put("nbCalcul", nbCalcul);
+
+            resp.setContentType("application/json");
+            PrintWriter writer = resp.getWriter();
+
+            writer.append(sendToAjax.toString());
+        } else {
+            resp.sendRedirect("meilleur_score");
         }
+    }
 
 }
 

@@ -6,6 +6,15 @@ public class Utilisateur {
     private String nom;
     private String username;
     private String password;
+    private int nbPartie;
+
+    public int getNbPartie() {
+        return nbPartie;
+    }
+
+    public void setNbPartie(int nbPartie) {
+        this.nbPartie = nbPartie;
+    }
 
     public String getPrenom() {
         return prenom;
@@ -39,6 +48,4 @@ public class Utilisateur {
         this.password = password;
     }
 
-    public void add(Partie partie) {
-    }
 }

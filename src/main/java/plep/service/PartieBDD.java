@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class PartieBDD {
 
-    public void enregistrerScore(Utilisateur user, int score) {
+    public void enregistrerScore(Partie partie, int score) {
 
         Connection connexion = Constantes.CONNEXION_BDD.loadDatabase();
         String sql = "UPDATE partie SET score = ? WHERE username = ? ;";
@@ -27,17 +27,17 @@ public class PartieBDD {
         }
     }
 
-    public Partie creationPartie(Utilisateur user) {
+    public void creationPartie(Utilisateur user) {
         Connection connexion = Constantes.CONNEXION_BDD.loadDatabase();
 
         Date date = new Date();
         Partie nouvellePartie = new Partie();
         nouvellePartie.setDatePartie(date);
-        nouvellePartie.setUser(user.getUsername());
+        nouvellePartie.setUtilisateur(user);
 
         try {
-            PreparedStatement preparedStatement = connexion.prepareStatement("INSERT INTO partie(datePartie, username) VALUES(?, ?);");
-            preparedStatement.setDate(1, new java.sql.Date(nouvellePartie.getDatePartie().getTime()));
+            PreparedStatement preparedStatement = connexion.prepareStatement("INSERT INTO partie(datePartie, usernamePartie) VALUES(?, ?);");
+            preparedStatement.setDate(1, new java.sql.Date(nouvellePartie.getDate().getTime()));
             preparedStatement.setString(2, user.getUsername());
 
             preparedStatement.executeUpdate();
@@ -45,9 +45,7 @@ public class PartieBDD {
             e.printStackTrace();
         } finally {
             // Fermeture de la connexion
-            Constantes.CONNEXION_BDD.fermetureConnexion(connexion);
+           // Constantes.CONNEXION_BDD.fermetureConnexion(connexion);
         }
-
-        return nouvellePartie;
     }
 }

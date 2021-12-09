@@ -14,14 +14,13 @@ import static plep.utils.Constantes.*;
 public class listerUtilisateurController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("utilisateurs", UTILISATEUR_BDD.recupUtilisateur());
         request.getRequestDispatcher("/WEB-INF/view/utilisateur/listerUtilisateur.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //req.setAttribute("Partie", PARTIE_BDD.creationPartie(UTILISATEUR_BDD.getLogUser(req.getSession())));
+        req.setAttribute("Partie", PARTIE_BDD.creationPartie(UTILISATEUR_BDD.getLogUser(req.getSession())));
         String diff = req.getParameter("diff");
         req.getSession().setAttribute("difficulte", diff);
         resp.sendRedirect("calculMental");
