@@ -4,6 +4,16 @@ import java.util.Date;
 
 public class Partie {
 
+    private  int idPartie;
+
+    public int getIdPartie() {
+        return idPartie;
+    }
+
+    public void setIdPartie(int idPartie) {
+        this.idPartie = idPartie;
+    }
+
     private Utilisateur user;
     private Date datePartie;
     private int score;

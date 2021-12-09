@@ -14,12 +14,12 @@ public class PartieBDD {
     public void enregistrerScore(Partie partie, int score) {
 
         Connection connexion = Constantes.CONNEXION_BDD.loadDatabase();
-        String sql = "UPDATE partie SET score = ? WHERE username = ? ;";
+        String sql = "UPDATE partie SET score = ? WHERE idpartie = ? ;";
 
         try {
             PreparedStatement statement = connexion.prepareStatement(sql);
             statement.setInt(1, score);
-            statement.setString(2, user.getUsername());
+            statement.setInt(2, partie.getIdPartie());
             statement.executeUpdate();
 
         } catch (SQLException throwables) {
@@ -27,7 +27,7 @@ public class PartieBDD {
         }
     }
 
-    public void creationPartie(Utilisateur user) {
+    public Partie creationPartie(Utilisateur user) {
         Connection connexion = Constantes.CONNEXION_BDD.loadDatabase();
 
         Date date = new Date();
@@ -47,5 +47,6 @@ public class PartieBDD {
             // Fermeture de la connexion
            // Constantes.CONNEXION_BDD.fermetureConnexion(connexion);
         }
+        return nouvellePartie;
     }
 }

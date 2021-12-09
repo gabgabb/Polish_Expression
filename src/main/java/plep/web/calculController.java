@@ -11,6 +11,7 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 import org.json.JSONObject;
+import plep.entite.Partie;
 import plep.utils.Constantes;
 
 @WebServlet("/calculMental")
@@ -24,16 +25,17 @@ public class calculController extends HttpServlet {
         int nbCalcul = 0;
         int score = 0;
         Stack calcul = Constantes.CALCUL_WEB.GenerationPile(diff);
-        System.out.println(calcul);
-        req.getSession().setAttribute("Score", score);
-        System.out.println("score " +score);
-        req.getSession().setAttribute("nbCalcul", nbCalcul);
-        System.out.println(" nbcalcul " + nbCalcul);
-        req.getSession().setAttribute("ReponseCalcul", Constantes.CALCUL_WEB.resultatCalcul(calcul));
-        System.out.println(" resultat" + Constantes.CALCUL_WEB.resultatCalcul(calcul));
-        req.getSession().setAttribute("StringCalcul", Constantes.CALCUL_WEB.afficherCalcul(calcul));
+        req.setAttribute("Score", score);
+        req.getAttribute("Score");
+        req.setAttribute("nbCalcul", nbCalcul);
+        req.getAttribute("nbCalcul");
+        int resultat = Constantes.CALCUL_WEB.resultatCalcul(calcul);
+        req.getSession().setAttribute("ReponseCalcul", resultat);
+        System.out.println(" resultat" + resultat);
+        String Stringcalc = Constantes.CALCUL_WEB.afficherCalcul(calcul);
+        req.getSession().setAttribute("StringCalcul", Stringcalc);
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/view/calcul/jeu.jsp").forward(req, resp);
+        req.getServletContext().getRequestDispatcher("/WEB-INF/view/calcul/jeu.jsp").forward(req, resp);
 
     }
 
@@ -75,7 +77,7 @@ public class calculController extends HttpServlet {
                     System.out.println("SCORE : " + score);
                     sendToAjax.put("score", score);
                     System.out.print(req.getSession().getAttribute("logUtilisateur"));
-                    Constantes.PARTIE_BDD.enregistrerScore(Constantes.UTILISATEUR_BDD.getLogUser(req.getSession()), score);
+                    Constantes.PARTIE_BDD.enregistrerScore((Partie) req.getAttribute("Partie"), score);
                 }
             }
 
