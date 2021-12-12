@@ -16,8 +16,7 @@
         </div>
     </div>
 
-    <c:set var="calcul" value="${StringCalcul}" scope="request"/>
-    <p id="calcul"><c:out value="${requestScope.StringCalcul}"/></p>
+    <p id="calcul"><c:out value="${sessionScope.StringCalcul}"/></p>
 
     <input class="form-control" type="number" id="reponse" name="reponse" placeholder="Entrez le résultat"/>
     <input class="btn btn-success" id="valider" type="submit" value="Valider" name="valider"/>
@@ -42,8 +41,7 @@
             data: JSON.stringify(data),
 
             success: function (resultatJSON) {
-                console.log(resultatJSON);
-                $("#progressbarCalcul").width(resultatJSON.nbCalcul*10 + '%');
+                $("#progressbarCalcul").width(resultatJSON.nbCalcul * 10 + '%');
                 $("#calcul").text(resultatJSON.affichageCalcul);
 
                 if (resultatJSON.bonneReponse === true) {
@@ -71,12 +69,10 @@
                 }
             },
             error: function (errorThrown) {
-                //your error code
                 alert("not success : " + errorThrown);
             }
         });
     });
-
 
 </script>
 </html>

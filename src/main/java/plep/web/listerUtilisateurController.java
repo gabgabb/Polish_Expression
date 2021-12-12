@@ -1,7 +1,6 @@
 package plep.web;
 
 import plep.entite.Partie;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,10 +20,14 @@ public class listerUtilisateurController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Partie partie = PARTIE_BDD.creationPartie(UTILISATEUR_BDD.getLogUser(req.getSession()));
-        req.getSession().setAttribute("Partie", partie );
-        String diff = req.getParameter("diff");
-        req.getSession().setAttribute("difficulte", diff);
-        this.getServletContext().getRequestDispatcher("/WEB-INF/view/calcul/jeu.jsp").forward(req, resp);
+
+            Partie partie = PARTIE_BDD.creationPartie(UTILISATEUR_BDD.getLogUser(req.getSession()));
+            req.getSession().setAttribute("Partie", partie);
+
+            String diff = req.getParameter("diff");
+            req.getSession().setAttribute("difficulte", diff);
+
+            resp.sendRedirect("calculMental");
+
     }
 }

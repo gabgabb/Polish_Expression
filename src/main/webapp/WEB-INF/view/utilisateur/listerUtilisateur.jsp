@@ -12,32 +12,31 @@
 <body>
 <h1>Les 10 meilleurs scores</h1>
 
-    <table id="tableauScore" class="table table-bordered">
-        <thead class="table-dark">
+<table id="tableauScore" class="table table-bordered">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col">Top 10</th>
+        <th scope="col">Username</th>
+        <th scope="col">Date</th>
+        <th scope="col">Score</th>
+        <th scope="col">Nombre de partie</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${parties}" var="partie" varStatus="loop">
         <tr>
-            <th scope="col">Top 10</th>
-            <th scope="col">Username</th>
-            <th scope="col">Date</th>
-            <th scope="col">Score</th>
-            <th scope="col">Nombre de partie</th>
+            <th scope="row">${loop.count}</th>
+            <td><c:out value="${partie.utilisateur.username}"/></td>
+            <td><c:out value="${partie.date}"/></td>
+            <td><c:out value="${partie.score}"/></td>
+            <td><c:out value="${partie.utilisateur.nbPartie}"/></td>
         </tr>
-        </thead>
-        <tbody>
-        <jsp:useBean id="parties" scope="request" type="java.util.List"/>
-        <c:forEach items="${parties}" var="partie" varStatus="loop">
-            <tr>
-                <th scope="row">${loop.count}</th>
-                <td><c:out value="${partie.utilisateur.username}"/></td>
-                <td><c:out value="${partie.date}"/></td>
-                <td><c:out value="${partie.score}"/></td>
-                <td><c:out value="${partie.utilisateur.nbPartie}"/></td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+    </c:forEach>
+    </tbody>
+</table>
 
 <form id="formJeuMental" class="formulaire" action="meilleur_score" method="post">
-    <input class="btn btn-lg btn-primary" type="submit" value="Jouer !">
+    <input class="btn btn-lg btn-primary" type="submit" name="bouttonPost" value="Jouer !">
 
     <p> Difficulté :</p>
     <select name="diff" class="form-select" data-size="5" aria-label="Default select example">

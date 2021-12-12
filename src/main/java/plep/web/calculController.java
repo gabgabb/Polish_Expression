@@ -21,22 +21,17 @@ public class calculController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int diff = Integer.parseInt((String) req.getSession().getAttribute("difficulte"));
-        System.out.print(diff);
         int nbCalcul = 0;
         int score = 0;
+
         Stack calcul = Constantes.CALCUL_WEB.GenerationPile(diff);
-        req.setAttribute("Score", score);
-        req.getAttribute("Score");
-        req.setAttribute("nbCalcul", nbCalcul);
-        req.getAttribute("nbCalcul");
-        int resultat = Constantes.CALCUL_WEB.resultatCalcul(calcul);
-        req.getSession().setAttribute("ReponseCalcul", resultat);
-        System.out.println(" resultat" + resultat);
-        String Stringcalc = Constantes.CALCUL_WEB.afficherCalcul(calcul);
-        req.getSession().setAttribute("StringCalcul", Stringcalc);
 
-        req.getServletContext().getRequestDispatcher("/WEB-INF/view/calcul/jeu.jsp").forward(req, resp);
+        req.getSession().setAttribute("Score", score);
+        req.getSession().setAttribute("nbCalcul", nbCalcul);
+        req.getSession().setAttribute("ReponseCalcul", Constantes.CALCUL_WEB.resultatCalcul(calcul));
+        req.getSession().setAttribute("StringCalcul", Constantes.CALCUL_WEB.afficherCalcul(calcul));
 
+        req.getRequestDispatcher("/WEB-INF/view/calcul/jeu.jsp").forward(req, resp);
     }
 
     @Override
@@ -49,7 +44,6 @@ public class calculController extends HttpServlet {
             String data = req.getReader().lines().collect(Collectors.joining());
 
             JSONObject jsondata = new JSONObject(data);
-            System.out.println("yakak" + jsondata);
 
             JSONObject sendToAjax = new JSONObject();
 
@@ -74,10 +68,8 @@ public class calculController extends HttpServlet {
                 }
                 nbCalcul++;
                 if (nbCalcul == 10) {
-                    System.out.println("SCORE : " + score);
                     sendToAjax.put("score", score);
-                    System.out.print(req.getSession().getAttribute("logUtilisateur"));
-                    Constantes.PARTIE_BDD.enregistrerScore((Partie) req.getAttribute("Partie"), score);
+                    Constantes.PARTIE_BDD.enregistrerScore((Partie) req.getSession().getAttribute("Partie"), score);
                 }
             }
 
