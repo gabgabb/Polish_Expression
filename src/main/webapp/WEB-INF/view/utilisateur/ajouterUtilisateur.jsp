@@ -21,10 +21,15 @@
 
         <label for="username">Username : </label>
         <input class="form-control" type="text" name="username" id="username" minlength="4" required/> <br>
-        <div id="msg"></div>
+
+        <div id="errorAlert" class="alert alert-danger d-flex align-items-center" role="alert">
+            <p id="msgUsername"></p>
+        </div>
+
 
         <label for="password">Password : </label>
-        <input class="form-control" type="password" name="password" id="password" minlength="4" autocomplete="on" required/> <br>
+        <input class="form-control" type="password" name="password" id="password" minlength="4" autocomplete="on"
+               required/> <br>
     </div>
     <input class="btn btn-success" type="submit" name="Creer" id="Creer" value="Valider"/>
 
@@ -33,12 +38,39 @@
 
 </body>
 <script>
+    $('#errorAlert').hide();
     $(document).ready(function () {
         $('#navbarbrand').hide();
         $('#divDroite').hide();
         $('#containerDiv').removeClass('container-fluid justify-content-between');
         $('#containerDiv').addClass('container-fluid justify-content-center');
+    });
 
+    $("#Creer").on('click', function () {
+
+        var usernamedata = $('#username').val();
+        var data = {
+            usernameData : usernamedata
+        }
+        $.ajax({
+            type: "POST",
+            url: "${pageContext.request.contextPath}/ajouter",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (resultatJSON) {
+                console.log("resultat : " + resultatJSON);
+                if (resultatJSON.bonneReponse === true) {
+                    $("#msgUsername").text(resultatJSON.username + " est déjà utilisé, entrez en un nouveau.")
+                    $("#errorAlert").show();
+                }
+                setTimeout(function () {
+                    $("#errorAlert").hide();
+                }, 1500);
+            },
+            error: function ( errorThrown) {
+                alert("not success : " + errorThrown);
+            }
+        });
     });
 </script>
 </html>

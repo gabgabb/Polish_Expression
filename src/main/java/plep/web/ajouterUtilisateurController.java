@@ -1,5 +1,7 @@
 package plep.web;
 
+import com.google.gson.Gson;
+import org.json.JSONObject;
 import plep.entite.Utilisateur;
 
 import javax.servlet.ServletException;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.stream.Collectors;
 
 import static plep.utils.Constantes.UTILISATEUR_BDD;
 
@@ -19,7 +22,12 @@ public class ajouterUtilisateurController extends HttpServlet {
         this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/ajouterUtilisateur.jsp").forward(request, response);
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+        String username = request.getParameter("usernameData");
+        System.out.println("USERNAME : " + username);
+        JSONObject sendToAjax = new JSONObject();
 
         Utilisateur utilisateur = new Utilisateur();
         utilisateur.setPrenom(request.getParameter("prenom"));
@@ -27,15 +35,19 @@ public class ajouterUtilisateurController extends HttpServlet {
         utilisateur.setUsername(request.getParameter("username"));
         utilisateur.setPassword(request.getParameter("password"));
 
-        if (UTILISATEUR_BDD.usernameAvailable(utilisateur)) {
+        if (UTILISATEUR_BDD.usernameAvailable(username)){
 
             UTILISATEUR_BDD.ajouterUtilisateur(utilisateur);
-
             this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/loginUtilisateur.jsp").forward(request, response);
         } else {
-            this.getServletContext().getRequestDispatcher("/WEB-INF/view/utilisateur/ajouterUtilisateur.jsp").forward(request, response);
+            boolean estUtilise = true;
+            sendToAjax.put("estUtilise", estUtilise);
+            sendToAjax.put("username", username);
+            System.out.println(" sendtoajax 2 : " +  sendToAjax);
+            response.setContentType("application/json");
+            PrintWriter writer = response.getWriter();
+            writer.append(sendToAjax.toString());
+
         }
-
-
     }
 }
