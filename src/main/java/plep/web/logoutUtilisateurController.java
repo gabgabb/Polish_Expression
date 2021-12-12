@@ -7,15 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/Logout")
+@WebServlet("/logout")
 public class logoutUtilisateurController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+            String message = "Déconnexion effectuée";
+            req.setAttribute("error", message);
             req.removeAttribute("logUtilisateur");
             req.getSession().invalidate();
-            req.getRequestDispatcher("/WEB-INF/view/utilisateur/loginUtilisateurController.jsp").forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/view/utilisateur/loginUtilisateur.jsp").forward(req,resp);
 
     }
 }
