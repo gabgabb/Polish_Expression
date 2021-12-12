@@ -54,7 +54,6 @@
 </body>
 
 <script>
-
     $(document).ready(function () {
         $('#navbarbrand').hide();
         $('#divDroite').hide();
@@ -62,6 +61,5 @@
         $('#containerDiv').addClass('container-fluid justify-content-center');
 
     });
-
 </script>
 </html>

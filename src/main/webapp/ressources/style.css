@@ -51,7 +51,7 @@ p {
     font-size: medium;
 }
 
-#formLogin, #formJeuMental {
+#formLogin, #formJeuMental , #ajoutUtilisateur{
     margin-top: 2%;
 }
 
