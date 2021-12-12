@@ -3,10 +3,7 @@ package plep.service;
 import plep.entite.Partie;
 import plep.entite.Utilisateur;
 import plep.utils.Constantes;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Date;
 
 public class PartieBDD {
@@ -32,20 +29,29 @@ public class PartieBDD {
 
         Date date = new Date();
         Partie nouvellePartie = new Partie();
+
         nouvellePartie.setDatePartie(date);
         nouvellePartie.setUtilisateur(user);
 
         try {
-            PreparedStatement preparedStatement = connexion.prepareStatement("INSERT INTO partie(datePartie, usernamePartie) VALUES(?, ?);");
+            PreparedStatement preparedStatement = connexion.prepareStatement("INSERT INTO partie(datePartie, usernamePartie) VALUES(?, ?);", Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setDate(1, new java.sql.Date(nouvellePartie.getDate().getTime()));
             preparedStatement.setString(2, user.getUsername());
 
             preparedStatement.executeUpdate();
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    nouvellePartie.setIdPartie((int) generatedKeys.getLong(1));
+                } else {
+                    throw new SQLException("Creating user failed, no ID obtained.");
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             // Fermeture de la connexion
-           // Constantes.CONNEXION_BDD.fermetureConnexion(connexion);
+            Constantes.CONNEXION_BDD.fermetureConnexion(connexion);
         }
         return nouvellePartie;
     }

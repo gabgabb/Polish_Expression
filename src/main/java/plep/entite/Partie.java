@@ -5,15 +5,6 @@ import java.util.Date;
 public class Partie {
 
     private  int idPartie;
-
-    public int getIdPartie() {
-        return idPartie;
-    }
-
-    public void setIdPartie(int idPartie) {
-        this.idPartie = idPartie;
-    }
-
     private Utilisateur user;
     private Date datePartie;
     private int score;
@@ -40,5 +31,13 @@ public class Partie {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int getIdPartie() {
+        return idPartie;
+    }
+
+    public void setIdPartie(int idPartie) {
+        this.idPartie = idPartie;
     }
 }

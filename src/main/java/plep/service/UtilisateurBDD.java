@@ -76,9 +76,8 @@ public class UtilisateurBDD {
     }
 
     // Vérifie si le username est disponible
-    public boolean usernameAvailable(Utilisateur utilisateur) {
+    public boolean usernameAvailable(String username) {
         boolean isAvailable = true;
-        String username = utilisateur.getUsername();
         ResultSet resultat = null;
 
         if (username.length() > 0) {
