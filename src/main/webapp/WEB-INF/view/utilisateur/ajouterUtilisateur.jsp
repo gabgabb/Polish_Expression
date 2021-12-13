@@ -20,7 +20,7 @@
         <input class="form-control" type="text" name="nom" id="nom" required/> <br>
 
         <label for="username">Username : </label>
-        <input class="form-control" type="text" name="username" id="username" minlength="4" required/> <br>
+        <input class="form-control" type="text" name="username" id="usernameInput" minlength="4" required/> <br>
 
         <div id="errorAlert" class="alert alert-danger d-flex align-items-center" role="alert">
             <p id="msgUsername"></p>
@@ -48,14 +48,15 @@
 
     $("#Creer").on('click', function () {
 
-        var usernamedata = $('#username').val();
+        var usernamedata = $('#usernameInput').val();
         var data = {
             usernameData : usernamedata
         }
+
         $.ajax({
             type: "POST",
-            url: "${pageContext.request.contextPath}/ajouter",
-            contentType: 'application/json',
+            url: "/ajouter",
+            dataType: 'JSON',
             data: JSON.stringify(data),
             success: function (resultatJSON) {
                 console.log("resultat : " + resultatJSON);

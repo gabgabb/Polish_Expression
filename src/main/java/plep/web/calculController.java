@@ -42,7 +42,6 @@ public class calculController extends HttpServlet {
         if (nbCalcul <= 10) {
 
             String data = req.getReader().lines().collect(Collectors.joining());
-
             JSONObject jsondata = new JSONObject(data);
 
             JSONObject sendToAjax = new JSONObject();
