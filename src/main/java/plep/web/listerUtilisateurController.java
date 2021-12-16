@@ -15,6 +15,7 @@ import static plep.utils.Constantes.*;
 public class listerUtilisateurController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getSession().setAttribute("parties", UTILISATEUR_BDD.recupUtilisateur());
         request.getRequestDispatcher("/WEB-INF/view/utilisateur/listerUtilisateur.jsp").forward(request, response);
     }
 

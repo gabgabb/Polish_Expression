@@ -24,7 +24,6 @@ public class loginUtilisateurController extends HttpServlet {
         String password = req.getParameter("password");
 
         if (UTILISATEUR_BDD.checkLogin(username, password) != null) {
-            req.getSession().setAttribute("parties", UTILISATEUR_BDD.recupUtilisateur());
             UTILISATEUR_BDD.setLogUser(req.getSession(), UTILISATEUR_BDD.checkLogin(username, password));
             resp.sendRedirect("meilleur_score");
         } else {
