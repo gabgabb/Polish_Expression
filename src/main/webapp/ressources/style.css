@@ -89,9 +89,15 @@ p {
 }
 
 #tableauScore {
-    width: 50%;
+    width: 100%;
     margin: auto;
     margin-top: 2%;
+}
+
+#errorAlert {
+    display: none;
+    width: 193px;
+
 }
 
 
