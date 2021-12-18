@@ -12,7 +12,7 @@ import java.util.List;
 public class UtilisateurBDD {
 
     // Récupère la liste des utilisateurs de la BDD
-    public List<Partie> recupUtilisateur() {
+    public List<Partie> recupUtilisateurs() {
 
         List<Partie> ListPartie = new ArrayList<>();
 
@@ -54,6 +54,46 @@ public class UtilisateurBDD {
         return ListPartie;
     }
 
+    public List<Partie> recupUtilisateur(String usernameProfile) {
+
+        List<Partie> ListPartie = new ArrayList<>();
+
+        Statement statement;
+        ResultSet resultat = null;
+
+        Connection connexion = Constantes.CONNEXION_BDD.loadDatabase();
+
+        try {
+            statement = connexion.createStatement();
+            // Exécution de la requête
+            resultat = statement.executeQuery("SELECT score, datePartie FROM utilisateur INNER JOIN partie ON utilisateur.username = partie.usernamePartie ORDER BY datePartie WHERE username='" + usernameProfile + "' ;");
+
+            // Récupération des données
+            while (resultat.next()) {
+                int score = resultat.getInt("score");
+                Date date = resultat.getDate("datePartie");
+                int nbPartie = resultat.getInt("nbPartie");
+
+                Utilisateur utilisateur = new Utilisateur();
+                Partie partie = new Partie();
+
+                utilisateur.setUsername(usernameProfile);
+                utilisateur.setNbPartie(nbPartie);
+                partie.setScore(score);
+                partie.setDatePartie(date);
+                partie.setUtilisateur(utilisateur);
+
+                ListPartie.add(partie);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Fermeture de la connexion
+            Constantes.CONNEXION_BDD.fermetureConnexion(resultat, connexion);
+        }
+        return ListPartie;
+    }
     // Ajoute un utilisateur à la BDD depuis le formulaire
     public void ajouterUtilisateur(Utilisateur utilisateur) {
 
