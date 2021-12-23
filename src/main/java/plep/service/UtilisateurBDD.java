@@ -66,7 +66,7 @@ public class UtilisateurBDD {
         try {
             statement = connexion.createStatement();
             // Exécution de la requête
-            resultat = statement.executeQuery("SELECT score, datePartie FROM utilisateur INNER JOIN partie ON utilisateur.username = partie.usernamePartie ORDER BY datePartie WHERE username='" + usernameProfile + "' ;");
+            resultat = statement.executeQuery("SELECT username, score, datePartie, COUNT(idpartie) OVER (PARTITION BY username ) as nbPartie FROM utilisateur INNER JOIN partie ON utilisateur.username = partie.usernamePartie  WHERE username='" + usernameProfile + "' ORDER BY datePartie ;");
 
             // Récupération des données
             while (resultat.next()) {
@@ -92,7 +92,9 @@ public class UtilisateurBDD {
             // Fermeture de la connexion
             Constantes.CONNEXION_BDD.fermetureConnexion(resultat, connexion);
         }
+        System.out.println(ListPartie);
         return ListPartie;
+
     }
     // Ajoute un utilisateur à la BDD depuis le formulaire
     public void ajouterUtilisateur(Utilisateur utilisateur) {
