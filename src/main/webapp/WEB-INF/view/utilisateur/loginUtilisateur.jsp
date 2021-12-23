@@ -26,11 +26,9 @@
         </div>
     </div>
 
-    <c:if test="${not empty requestScope.error}">
-        <div id="errorAlert" class="alert alert-danger d-flex align-items-center" role="alert">
-            <div> ${requestScope.error.toString()} </div>
-        </div>
-    </c:if>
+    <div id="errorAlert" class="alert alert-danger align-items-center" role="alert">
+        <p id="msgError"></p>
+    </div>
 
     <div class="buttonLogin">
         <input class="btn btn-success" type="submit" value="Connexion">
@@ -47,9 +45,26 @@
     $(document).ready(function () {
         $('#navbarbrand').hide();
         $('#divDroite').hide();
+        $('#errorAlert').hide();
         $('#containerDiv').removeClass('container-fluid justify-content-between');
         $('#containerDiv').addClass('container-fluid justify-content-center');
 
+        $.ajax({
+            type: "GET",
+            url: "login",
+            dataType: 'JSON',
+            contentType: "application/json",
+            success: function (resultJSON) {
+                console.log(resultJSON);
+
+                $("#msgError").text(resultJSON.error);
+                $('#errorAlert').fadeTo(2000, 500);
+
+                setTimeout(function () {
+                    $("#errorAlert").fadeOut("slow");
+                }, 2500);
+            }
+        });
     });
 </script>
 </html>

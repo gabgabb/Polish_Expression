@@ -20,6 +20,7 @@ public class Filter implements javax.servlet.Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession(false);
         String loginURI = request.getContextPath() + "/";
+        String loginURI2 = request.getContextPath() + "/login";
         String createURI = request.getContextPath() + "/ajouter";
 
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
@@ -28,14 +29,15 @@ public class Filter implements javax.servlet.Filter {
 
         boolean loggedIn = session != null && session.getAttribute("logUtilisateur") != null;
         boolean loginRequest = request.getRequestURI().equals(loginURI);
+        boolean loginRequest2 = request.getRequestURI().equals(loginURI2);
         boolean createRequest = request.getRequestURI().equals(createURI);
 
-        if (loggedIn || loginRequest || createRequest || request.getRequestURI().endsWith(".css")) {
+        if (loggedIn || loginRequest || loginRequest2   || createRequest || request.getRequestURI().endsWith(".css")) {
             filterChain.doFilter(request, response);
         } else {
             String error = "Veuillez vous connecter ou créer un compte.";
-            request.setAttribute("error", error);
-            request.getRequestDispatcher("/login").forward(request,response);
+            request.getSession().setAttribute("error", error);
+            response.sendRedirect("login");
         }
     }
 

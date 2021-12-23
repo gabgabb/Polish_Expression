@@ -56,7 +56,7 @@ public class ajouterUtilisateurController extends HttpServlet {
         } else {
             estUtilise = true;
         }
-        if(receiveJson.get("usernamedata")!=null){
+        if (receiveJson.get("usernamedata") != null) {
             sendToAjax.put("estUtilise", estUtilise);
             sendToAjax.put("username", receiveJson.get("usernamedata"));
             response.setContentType("application/json");
