@@ -17,7 +17,7 @@
                 <a id="navbarbrand" class="navbar-brand" href="meilleur_score"> Meilleurs scores</a>
             </div>
             <ul id="divDroite" class="navbar-nav flex-row" style="width: 12%">
-                <li id="premierli"><a id="btnProfil" class="nav-link active" href="#">Mon profil</a></li>
+                <li id="premierli"><a id="btnProfil" class="nav-link active" href="profil">Mon profil</a></li>
                 <li><a id="btnDeco" class="btn btn-danger" href="logout"> Déconnexion </a></li>
             </ul>
         </div>
