@@ -9,7 +9,7 @@
 <div id="profil">
     <label> Nom :</label>
     <br>
-    <label> Prenom :</label>
+    <label> Prenom : </label>
     <br>
     <label> Username : </label>
     <br>
