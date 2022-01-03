@@ -1,7 +1,7 @@
 package plep.service;
 
 import java.sql.*;
-
+// Permet d'initialiser la BDD pour chaque appel à la BDD
 public class ConnexionBDD {
 
     private Connection connexion = null;
