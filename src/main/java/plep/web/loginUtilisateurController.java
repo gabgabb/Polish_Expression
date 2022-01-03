@@ -7,7 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import static plep.utils.Constantes.UTILISATEUR_BDD;
@@ -17,31 +19,34 @@ public class loginUtilisateurController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String txt = (String) req.getSession().getAttribute("error");
-        JSONObject sendToAjax = new JSONObject();
-        if (txt != null) {
-            sendToAjax.put("error", txt);
-            System.out.println(sendToAjax);
-            resp.setContentType("application/json");
-            PrintWriter writer = resp.getWriter();
-            writer.append(sendToAjax.toString());
-        }
         req.getRequestDispatcher("/WEB-INF/view/utilisateur/loginUtilisateur.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+        PrintWriter writer = resp.getWriter();
+        // Permet de lire les données envoyés dans le json depuis l'ajax
+        JSONObject sendToAjax = new JSONObject();
+        BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
+        String jsonString = "";
+        jsonString = br.readLine();
+        JSONObject receiveJson = new JSONObject(jsonString);
 
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
+        String username = (String) receiveJson.get("usernamedata");
+        String pwd = (String) receiveJson.get("pwddata");
 
-        if (UTILISATEUR_BDD.checkLogin(username, password) != null) {
-            UTILISATEUR_BDD.setLogUser(req.getSession(), UTILISATEUR_BDD.checkLogin(username, password));
-            resp.sendRedirect("meilleur_score");
+        // Vérifie si l'utilisateur existe
+        if (UTILISATEUR_BDD.checkLogin(username, pwd) != null) {
+            // Redirige à la page d'acceuil et fixe l'utilisateur à la session
+            UTILISATEUR_BDD.setLogUser(req.getSession(), UTILISATEUR_BDD.checkLogin(username, pwd));
+            sendToAjax.put("redirect", "meilleur_score");
+            writer.append(sendToAjax.toString());
         } else {
+            // Renvoie à l'ajax l'erreur
             String error = "Mot de passe ou username incorrect.";
-            req.getSession().setAttribute("error", error);
-            resp.sendRedirect("login");
+            sendToAjax.put("errorLogin", error);
+            writer.append(sendToAjax.toString());
         }
     }
 }
