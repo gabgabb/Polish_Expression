@@ -9,46 +9,51 @@ public class ExpressionImpl implements Expression {
     // Génère une pile de calcul selon une difficulté précisé
     @Override
     public Stack empile(int difficulte) {
-
+        // Créé une nouvelle pile
         Stack pile = new Stack();
-
+        // Pour n difficulté
         for (int i = 0; i < difficulte; i++) {
-
+            // Vérifie si la boucle suivante est égale à la difficulté
             if (i + 1 == difficulte) {
-
+                // Génère un opérateur random
                 int operateur = (int) (Math.random() * 6);
                 Operateur ope = new Operateur(operateur);
                 ajoutPileOperant(ope, pile);
-
+                // S'il est binaire
                 if (ope.isBinaire()) {
+                    // Si l'opérateur est un divisé, évite les divisés par 0
                     if (ope.operateur == 2) {
-                        ajoutPileNombre((int) ((Math.random() * 9) + 1), pile);
-                        ajoutPileNombre((int) ((Math.random() * 9) + 1), pile);
+                        ajoutPileNombre((int) (Math.random() * 9 + 1), pile);
+                        ajoutPileNombre((int) (Math.random() * 9 + 1), pile);
                     } else {
-                        ajoutPileNombre((int) (Math.random() * 10), pile);
-                        ajoutPileNombre((int) (Math.random() * 10), pile);
+                        ajoutPileNombre(Math.round(Math.random() * 10 * 100) / 100.00, pile);
+                        ajoutPileNombre(Math.round(Math.random() * 10 * 100) / 100.00, pile);
                     }
+                    // Si l'opérateur est unaire
                 } else {
-                    ajoutPileNombre((int) (Math.random() * 10), pile);
+                    ajoutPileNombre(Math.round(Math.random() * 10 * 100) / 100.00, pile);
                 }
-
+                // Si c'est le premier tour de boucle
             } else if (i == 0) {
+                // Génère un opérateur random
                 int operateur = (int) (Math.random() * 6);
                 Operateur ope = new Operateur(operateur);
                 ajoutPileOperant(ope, pile);
-
+                // Si l'opérateur est binaire
                 if (ope.isBinaire()) {
-                    ajoutPileNombre((int) (Math.random() * 10), pile);
+                    ajoutPileNombre(Math.round(Math.random() * 10 * 100) / 100.00, pile);
                 }
+                // Si c'est un autre tour de boucle
             } else {
-
+                // Génère un opérateur random
                 int operateur = (int) (Math.random() * 4);
                 Operateur ope = new Operateur(operateur);
                 ajoutPileOperant(ope, pile);
-
+                // Si l'opérateur est unaire
                 if (!(ope.isBinaire())) {
+                    // Génère soit un nombre soit un autre opérateur unaire
                     if ((int) (Math.random() * 2) == 1) {
-                        ajoutPileNombre((int) (Math.random() * 10), pile);
+                        ajoutPileNombre(Math.round(Math.random() * 10 * 100) / 100.00, pile);
                     } else {
                         operateur = (int) ((Math.random() * 2) + 3);
                         Operateur ope2 = new Operateur(operateur);
@@ -56,9 +61,9 @@ public class ExpressionImpl implements Expression {
 
                     }
                 } else if (ope.operateur == 2) {
-                    ajoutPileNombre((int) ((Math.random() * 9) + 1), pile);
+                    ajoutPileNombre((int) (Math.random() * 9 + 1), pile);
                 } else {
-                    ajoutPileNombre((int) (Math.random() * 10), pile);
+                    ajoutPileNombre(Math.round(Math.random() * 10 * 100) / 100.00, pile);
                 }
             }
         }
@@ -67,30 +72,34 @@ public class ExpressionImpl implements Expression {
 
     // Dépile pour faire le calcul du résultat
     @Override
-    public int depile(Stack pileCalcul) {
+    public double depile(Stack pileCalcul) {
         Stack pileResultat = new Stack();
 
         while (pileCalcul.size() > 0) {
-
+            // Si l'objet est un opérateur
             if (pileCalcul.peek() instanceof Operateur) {
                 Operateur ope = (Operateur) pileCalcul.pop();
-
+                // Si l'opérateur est binaire
                 if (ope.isBinaire()) {
-                    int chiffre1 = (int) pileResultat.pop();
-                    int chiffre2 = (int) pileResultat.pop();
+                    // Pop les deux nombres
+                    double chiffre1 = (double) pileResultat.pop();
+                    double chiffre2 = (double) pileResultat.pop();
+                    // Effectue le calcul des deux chiffres
                     ajoutPileNombre(calcul(chiffre1, chiffre2, ope), pileResultat);
-
+                    // Si l'opérateur est unaire
                 } else {
-                    int chiffre1 = (int) pileResultat.pop();
+                    // Pop un nombre
+                    double chiffre1 = (double) pileResultat.pop();
+                    // Effectue le calcul du chiffre
                     ajoutPileNombre(calcul(chiffre1, ope), pileResultat);
                 }
+                // Si l'objet est un chiffre
             } else {
                 pileResultat.push(pileCalcul.pop());
-
             }
         }
-        System.out.println("Résultat :" + pileResultat.peek());
-        return (int) pileResultat.peek();
+        // Retourne le résultat
+        return (double) pileResultat.peek();
     }
 
     // Ajout d'un opérant à la pile
@@ -99,12 +108,14 @@ public class ExpressionImpl implements Expression {
         pile.push(operande);
     }
 
+    // Ajout d'un nombre à la pile
     @Override
-    public void ajoutPileNombre(int operante, Stack pile) {
+    public void ajoutPileNombre(double operante, Stack pile) {
         pile.push(operante);
     }
 
-    public int calcul(int c1, int c2, Operateur ope) {
+    // Permet le calcul des opérateurs binaires
+    public double calcul(double c1, double c2, Operateur ope) {
 
         switch (TypeOperateur.values()[ope.operateur]) {
             case PLUS:
@@ -123,21 +134,23 @@ public class ExpressionImpl implements Expression {
         return 0;
     }
 
-    public int calcul(int c1, Operateur ope) {
+    // Permet le calcul des opérateurs unaires
+    public double calcul(double c1, Operateur ope) {
         switch (TypeOperateur.values()[ope.operateur]) {
             case RACINE:
                 ope.res = "√";
-                return (int) Math.sqrt(c1);
+                return Math.sqrt(c1);
             case INVERSE:
                 ope.res = "inv";
-                return (int) Math.pow(c1, -1);
+                return Math.pow(c1, -1);
         }
         return 0;
     }
 
+    // Permet d'afficher la pile du calcul en affichage plus humain pour permettre le calcul mental
     public String toStringPile(Stack pile) {
 
-        if (pile.peek() instanceof Integer) {
+        if (pile.peek() instanceof Double) {
             return String.valueOf(pile.pop());
         }
         if (pile.peek() instanceof Operateur) {
