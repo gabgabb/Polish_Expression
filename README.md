@@ -1,5 +1,15 @@
 # Polish_Expression
 
+## Lien Github :
+
+https://github.com/gabgabb/Polish_Expression/
+
+## Groupe :
+
+Filiot Gabriel <br>
+Servant Jordan <br>
+Gautier Dorian <br>
+
 ## Installation de la BDD
 
 Nom de la BDD : javaee <br>
@@ -33,7 +43,3 @@ CREATE TABLE `utilisateur` (<br>
 1 : Pour commencer à faire des calculs mentaux, il suffit de créer un compte, de se connecter. <br>
 2 : Selectionner une difficulté et cliquez sur Jouez ! <br>
 3 : Entrez un résultat et cliquez sur valider à chaque calcul
-
-
-
-
