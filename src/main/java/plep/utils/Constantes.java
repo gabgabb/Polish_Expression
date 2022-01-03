@@ -7,7 +7,7 @@ import plep.service.ConnexionBDD;
 import plep.service.UtilisateurBDD;
 
 public interface Constantes {
-
+    // Créé les constantes des services
     ConnexionBDD CONNEXION_BDD = new ConnexionBDD();
     UtilisateurBDD UTILISATEUR_BDD = new UtilisateurBDD();
     ExpressionImpl EXPRESSION = new ExpressionImpl();

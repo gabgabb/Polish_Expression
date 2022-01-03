@@ -2,19 +2,20 @@ package plep.calcul;
 
 import java.util.Stack;
 
+// Interface d'implémentation des fonctions de calcul
 public interface Expression {
 
     public Stack empile(int difficulte);
 
-    public int depile(Stack pile);
+    public double depile(Stack pile);
 
     public void ajoutPileOperant(Operateur operande, Stack pile);
 
-    public void ajoutPileNombre(int operante, Stack pile);
+    public void ajoutPileNombre(double operante, Stack pile);
 
-    public int calcul(int c1, int c2, Operateur ope);
+    public double calcul(double c1, double c2, Operateur ope);
 
-    public int calcul(int c1, Operateur ope);
+    public double calcul(double c1, Operateur ope);
 
     public String toStringPile(Stack pile);
 

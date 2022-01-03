@@ -1,7 +1,7 @@
 package plep.utils;
 
 public enum TypeOperateur {
-
+    // Permet d'utiliser les opérateurs et les transformer en string
     PLUS, MOINS, DIVISE, MULTIPLIE, INVERSE, RACINE;
 
     public static String mapping(TypeOperateur to) {

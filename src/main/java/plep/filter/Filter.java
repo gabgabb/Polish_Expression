@@ -16,6 +16,7 @@ public class Filter implements javax.servlet.Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        // Filtre pour le login afin d'empêcher d'acceder à d'autres pages
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession(false);
@@ -27,16 +28,18 @@ public class Filter implements javax.servlet.Filter {
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Expires", "0");
 
+        // URL acceptés par le filtre
         boolean loggedIn = session != null && session.getAttribute("logUtilisateur") != null;
         boolean loginRequest = request.getRequestURI().equals(loginURI);
         boolean loginRequest2 = request.getRequestURI().equals(loginURI2);
         boolean createRequest = request.getRequestURI().equals(createURI);
 
+        // Vérifie si le filtre est vérifié
         if (loggedIn || loginRequest || loginRequest2   || createRequest || request.getRequestURI().endsWith(".css")) {
             filterChain.doFilter(request, response);
         } else {
             String error = "Veuillez vous connecter ou créer un compte.";
-            request.getSession().setAttribute("error", error);
+            request.getSession().setAttribute("errorLogin", error);
             response.sendRedirect("login");
         }
     }
