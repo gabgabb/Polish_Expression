@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    margin:0;
+    padding:0;
+    font-family: Roboto, sans-serif;
+}
+
+.formulaire, #calculJeu, #profil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+}
+
+h3 {
+    margin-bottom: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+    margin-top : 0.9%;
+}
+
+.navbar, .container-fluid {
+    height: 4em;
+    flex-wrap: initial;
+}
+
+#premierli {
+    margin-right: 0.5%;
+}
+
+.form-select {
+    width: 4%;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    margin: 0.80%;
+    font-size: medium;
+}
+
+#formLogin, #formJeuMental , #ajoutUtilisateur{
+    margin-top: 2%;
+}
+
+#reponse {
+    width: 10%;
+    margin: 1% auto 1%;
+    text-align: center;
+}
+
+.inputLogin {
+    margin : 10% auto 10%;
+}
+
+.buttonLogin {
+    margin : 0.5% auto 0.5%;
+}
+
+#calcul {
+    margin-top: 8%;
+    font-size: x-large;
+}
+
+#valider {
+    width: 8%;
+    margin: 1% auto 1%;
+}
+
+#bonneReponse {
+    font-size: x-large;
+    margin: 1% auto 1%;
+}
+
+#premierli {
+    margin-right: 10%;
+}
+
+#tableauScore, #tableauScoreProfile {
+    width: 40%;
+    margin: auto;
+    margin-top: 2%;
+
+}
+
+#taaaab{
+    height: 50%;
+    overflow: auto;
+    margin-top: 0%;
+}
+
+#errorAlert {
+    display: none;
+    width: 193px;
+
+}
+
+.labelProfil{
+    display: -webkit-inline-box;
+}
+
+

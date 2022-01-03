@@ -2,37 +2,50 @@ package plep.entite;
 
 public class Utilisateur {
 
-        private String prenom;
-        private String nom;
-        private String username;
-        private String password;
-        private int score;
+    private String prenom;
+    private String nom;
+    private String username;
+    private String password;
+    private int nbPartie;
 
-    public Utilisateur(String prenom, String nom, String username, String password, int score) {
-        this.prenom = prenom;
-        this.nom = nom;
-        this.username = username;
-        this.password = password;
-        this.score = score;
+    public int getNbPartie() {
+        return nbPartie;
     }
 
-    public String getPrenom() {return prenom;}
+    public void setNbPartie(int nbPartie) {
+        this.nbPartie = nbPartie;
+    }
 
-    public void setPrenom(String prenom) {this.prenom = prenom;}
+    public String getPrenom() {
+        return prenom;
+    }
 
-    public String getNom() {return nom;}
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 
-    public void setNom(String nom) {this.nom = nom;}
+    public String getNom() {
+        return nom;
+    }
 
-    public String getUsername() {return username;}
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
-    public void setUsername(String username) {this.username = username;}
+    public String getUsername() {
+        return username;
+    }
 
-    public String getPassword() {return password;}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    public void setPassword(String password) {this.password = password;}
+    public String getPassword() {
+        return password;
+    }
 
-    public int getScore() {return score;}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public void setScore(int score) {this.score = score;}
 }
