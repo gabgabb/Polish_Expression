@@ -11,8 +11,8 @@ import java.util.List;
 
 public class UtilisateurBDD {
 
-    // Récupère la liste des utilisateurs de la BDD
-    public List<Partie> recupUtilisateurs() {
+    // Récupère le top 10 des utilisateurs de la BDD
+    public List<Partie> recupTopUser() {
 
         List<Partie> ListPartie = new ArrayList<>();
 
@@ -54,7 +54,8 @@ public class UtilisateurBDD {
         return ListPartie;
     }
 
-    public List<Partie> recupUtilisateur(String usernameProfile) {
+    // Récupère les parties d'un utilisateur
+    public List<Partie> recupPartieUtilisateur(String usernameProfile) {
 
         List<Partie> ListPartie = new ArrayList<>();
 
@@ -92,10 +93,9 @@ public class UtilisateurBDD {
             // Fermeture de la connexion
             Constantes.CONNEXION_BDD.fermetureConnexion(resultat, connexion);
         }
-        System.out.println(ListPartie);
         return ListPartie;
-
     }
+
     // Ajoute un utilisateur à la BDD depuis le formulaire
     public void ajouterUtilisateur(Utilisateur utilisateur) {
 
@@ -171,6 +171,38 @@ public class UtilisateurBDD {
                 // Fermeture de la connexion
                 Constantes.CONNEXION_BDD.fermetureConnexion(resultat, connexion);
             }
+        }
+        return null;
+    }
+
+    // Récupère les informations d'un utilisateur
+    public Utilisateur infoUser(String Username) {
+
+        Connection connexion = Constantes.CONNEXION_BDD.loadDatabase();
+        Statement statement;
+        ResultSet resultat = null;
+
+        try {
+            statement = connexion.createStatement();
+            // Exécution de la requête
+            resultat = statement.executeQuery("SELECT nom,prenom FROM utilisateur WHERE username='" + Username + "' ;");
+
+            if (resultat.next()) {
+
+                String nom = resultat.getString("nom");
+                String prenom = resultat.getString("prenom");
+
+                Utilisateur user = new Utilisateur();
+                user.setNom(nom);
+                user.setPrenom(prenom);
+
+                return user;
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        } finally {
+            // Fermeture de la connexion
+            Constantes.CONNEXION_BDD.fermetureConnexion(resultat, connexion);
         }
         return null;
     }
