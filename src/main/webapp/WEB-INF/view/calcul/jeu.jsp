@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <p id="calcul"><c:out value="${sessionScope.StringCalcul}"/></p>
+    <p id="calcul">${sessionScope.StringCalcul}</p>
 
     <input class="form-control" type="number" id="reponse" name="reponse" placeholder="Entrez le résultat"/>
     <input class="btn btn-success" id="valider" type="submit" value="Valider" name="valider"/>
@@ -59,7 +59,12 @@
                     setTimeout(function () {
                         $("#bonneReponse").hide();
                         $("#calcul").text("Score total : " + resultatJSON.score + "/10");
-
+                        setTimeout(function () {
+                            if (resultatJSON.redirect) {
+                                console.log(resultatJSON.redirect);
+                                window.location.href = resultatJSON.redirect;
+                            }
+                        }, 2500);
                     }, 1500);
                 } else {
                     $("#reponse").val("");
