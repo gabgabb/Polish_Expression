@@ -24,23 +24,26 @@ public class ajouterUtilisateurController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String bouton = request.getParameter("Creer");
+        // Permet de lire les données envoyés dans le json depuis l'ajax
         BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
         String jsonString = "";
-
         jsonString = br.readLine();
 
         JSONObject sendToAjax = new JSONObject();
+        // On crée un json si le bouton submit n'a pas été cliqué
         JSONObject receiveJson = null;
         if (bouton == null) {
             receiveJson = new JSONObject(jsonString);
         }
 
         boolean estUtilise = false;
+        // Vérifie si l'username n'est pas null et que l'username est disponible
         if (request.getParameter("username") != null && UTILISATEUR_BDD.usernameAvailable(request.getParameter("username"))) {
+            // Vérifie si tous les champs sont remplis
             if (request.getParameter("prenom") != null && request.getParameter("nom") != null
                     && request.getParameter("username") != null && request.getParameter("password") != null
                     && request.getParameter("Creer") != null) {
-
+                // Créé un nouvel utilisateur et l'ajoute à la BDD
                 Utilisateur utilisateur = new Utilisateur();
                 utilisateur.setPrenom(request.getParameter("prenom"));
                 utilisateur.setNom(request.getParameter("nom"));
@@ -56,6 +59,7 @@ public class ajouterUtilisateurController extends HttpServlet {
         } else {
             estUtilise = true;
         }
+        // Vérifie si usernamedata n'est pas null et envoie le booléen pour vérifier si l'username est disponible ou non
         if (receiveJson.get("usernamedata") != null) {
             sendToAjax.put("estUtilise", estUtilise);
             sendToAjax.put("username", receiveJson.get("usernamedata"));
