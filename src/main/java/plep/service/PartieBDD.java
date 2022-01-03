@@ -5,9 +5,11 @@ import plep.entite.Utilisateur;
 import plep.utils.Constantes;
 import java.sql.*;
 import java.util.Date;
+import java.util.List;
 
 public class PartieBDD {
 
+    // Enregistre le score
     public void enregistrerScore(Partie partie, int score) {
 
         Connection connexion = Constantes.CONNEXION_BDD.loadDatabase();
@@ -24,6 +26,7 @@ public class PartieBDD {
         }
     }
 
+    // Créé la partie dans la BDD
     public Partie creationPartie(Utilisateur user) {
         Connection connexion = Constantes.CONNEXION_BDD.loadDatabase();
 
@@ -54,5 +57,26 @@ public class PartieBDD {
             Constantes.CONNEXION_BDD.fermetureConnexion(connexion);
         }
         return nouvellePartie;
+    }
+
+    // Calcul la moyenne des parties d'un utilisateur
+    public int calculMoyenne(Utilisateur user){
+        List<Partie> ListePartie = Constantes.UTILISATEUR_BDD.recupPartieUtilisateur(user.getUsername());
+        int moyenne = 0;
+        for (Partie partie: ListePartie) {
+            moyenne+=partie.getScore();
+        }
+        moyenne = moyenne/ListePartie.size();
+        return moyenne;
+    }
+
+    // Retourne le nombre de parties effectuées par un utilisateur
+    public int nbPartie(Utilisateur user) {
+        List<Partie> ListePartie = Constantes.UTILISATEUR_BDD.recupPartieUtilisateur(user.getUsername());
+        int nbPartie = 0;
+        for (Partie partie : ListePartie) {
+            nbPartie++;
+        }
+        return nbPartie;
     }
 }
