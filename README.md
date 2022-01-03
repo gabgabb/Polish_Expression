@@ -2,9 +2,9 @@
 
 ## Installation de la BDD
 
-Nom de la BDD : javaee
-User : root
-Pwd : root
+Nom de la BDD : javaee <br>
+User : root <br>
+Pwd : root <br>
 
 Executez les scripts des tables suivants pour la BDD en SQL
 
