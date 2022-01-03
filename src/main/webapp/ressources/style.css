@@ -6,7 +6,7 @@
     font-family: Roboto, sans-serif;
 }
 
-.formulaire, #calculJeu {
+.formulaire, #calculJeu, #profil {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,6 +31,11 @@ h3 {
     text-align: center;
 }
 
+h4 {
+    text-align: center;
+    margin-top : 0.9%;
+}
+
 .navbar, .container-fluid {
     height: 4em;
     flex-wrap: initial;
@@ -47,7 +52,7 @@ h3 {
 
 p {
     text-align: center;
-    margin: 0.5%;
+    margin: 0.80%;
     font-size: medium;
 }
 
@@ -88,16 +93,27 @@ p {
     margin-right: 10%;
 }
 
-#tableauScore {
+#tableauScore, #tableauScoreProfile {
     width: 40%;
     margin: auto;
     margin-top: 2%;
+
+}
+
+#taaaab{
+    height: 50%;
+    overflow: auto;
+    margin-top: 0%;
 }
 
 #errorAlert {
     display: none;
     width: 193px;
 
+}
+
+.labelProfil{
+    display: -webkit-inline-box;
 }
 
 
